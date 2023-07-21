@@ -21,11 +21,12 @@ namespace HULK_COMPILER
         {
             //With this enum, you can see, the diffrent tokens types defined for a Compiler
             Token_Let, Token_Else, Token_Funtion, Token_If, Token_In, Token_Then, Token_While,
-            Token_Sum, Token_Dif, Token_Mult, Token_Div, Token_Equal, Token_Mod,
+            Token_Sum, Token_Dif, Token_Mult, Token_Div, Token_Equal, Token_Mod, Token_Exp,
             Token_Less, Token_More, Token_LessOrEqual, Token_MoreOrEqual, Token_DoubleEqual, Token_NoEqual,
             Token_Not, Token_And, Token_Or,
             WhiteSpace, Open_Paren, Close_Paren, Open_Block, Close_Block, Open_Key, Close_Key, EndLine,
-            Identifiquer, Chain_Lietarls, Number_Literals
+            Identifiquer, Chain_Lietarls, Number_Literals,
+            Token_Log, Token_Sen, Token_Cos, Token_Tan, Token_Cot, Token_Sqrt
         }
         public TokenTypes Types;
         public string Value;
@@ -50,6 +51,7 @@ namespace HULK_COMPILER
             {"*", new Token(TokenTypes.Token_Mult, "*")},
             {"/", new Token(TokenTypes.Token_Div, "/")},
             {"=", new Token(TokenTypes.Token_Equal, "=")},
+            {"^",new Token(TokenTypes.Token_Exp,"^")},
             {"%", new Token(TokenTypes.Token_Mod, "%")},
             {"<", new Token(TokenTypes.Token_Less,"<")},
             {">", new Token(TokenTypes.Token_More,">")},
@@ -68,6 +70,12 @@ namespace HULK_COMPILER
             {"{", new Token(TokenTypes.Open_Key,"{")},
             {"}",new Token(TokenTypes.Close_Key,"}")},
             {";",new Token(TokenTypes.EndLine,";")},
+            {"log",new Token(TokenTypes.Token_Log,"log")},
+            {"sen", new Token(TokenTypes.Token_Sen,"sen")},
+            {"cos", new Token(TokenTypes.Token_Cos,"cos")},
+            {"tan", new Token(TokenTypes.Token_Tan,"tan")},
+            {"cot", new Token(TokenTypes.Token_Cot,"cot")},
+            {"sqrt", new Token(TokenTypes.Token_Sqrt,"sqrt")},
         };
     }
 }
