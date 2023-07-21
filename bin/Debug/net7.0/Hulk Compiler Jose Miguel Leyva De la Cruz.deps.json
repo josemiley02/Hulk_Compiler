@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "Hulk Compiler Jose Miguel Leyva De la Cruz/1.0.0": {
+        "runtime": {
+          "Hulk Compiler Jose Miguel Leyva De la Cruz.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Hulk Compiler Jose Miguel Leyva De la Cruz/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
