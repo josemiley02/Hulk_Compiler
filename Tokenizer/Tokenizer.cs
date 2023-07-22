@@ -19,7 +19,7 @@ namespace HULK_COMPILER
                 if (codeline[i] == ' ')
                 {
                     if (temp == "") continue;
-                    if (temp != "")
+                    else
                     {
                         tokens.Add(GetToken(temp));
                         temp = "";
@@ -113,18 +113,35 @@ namespace HULK_COMPILER
             int new_index = 0;
             bool IsE = false;
             bool Is_Come = false;
-            while (index < codeline.Length && (char.IsDigit(codeline[index]) || codeline[index] == 'e' || codeline[index] == ','))
+            for (int i = index; i < codeline.Length; i++)
             {
-                if ((codeline[index] == 'e' && IsE) || (codeline[index] == ',' && Is_Come) || (codeline[index] != 'e'))
+                if ((codeline[i] == 'e' && IsE) || (codeline[i] == ',' && Is_Come))
                 {
-                    Code_Location locationerror = new Code_Location(1, index);
+                    Code_Location locationerror = new Code_Location(1, i);
                     throw new Lexical_Error("!Invalid Token" + 
                     "(" + locationerror.line + locationerror.column +")");
                 }
-                if (codeline[index] == 'e') IsE = true;
-                if (codeline[index] == ',') Is_Come = true;
-                result += codeline[index];
-                index += 1;
+                if (codeline[i] == 'e') 
+                {
+                    IsE = true;
+                    continue;
+                }
+                if (codeline[i] == ',') 
+                {
+                    Is_Come = true;
+                    continue;
+                }
+                if(char.IsLetter(codeline[i]))
+                {
+                    Code_Location locationerror = new Code_Location(1, i);
+                    throw new Lexical_Error("!Invalid Token" + 
+                    "(" + locationerror.line + "," + locationerror.column +")");
+                }
+                if (!char.IsLetterOrDigit(codeline[i]))
+                {
+                    break;
+                }
+                result += codeline[i];
                 new_index += 1;
             }
             return (result, new_index);
