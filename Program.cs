@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            string test = "if(a<=(10 + 3) - 5)";
+            string test = "let 14a = 5 in print(14a)";
             System.Console.WriteLine(test);
             List<Token> tokens = Tokenizer.GetTokens(test);
             foreach (var item in tokens)
