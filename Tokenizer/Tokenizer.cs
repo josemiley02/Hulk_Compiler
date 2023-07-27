@@ -118,8 +118,7 @@ namespace HULK_COMPILER
                 if ((codeline[i] == 'e' && IsE) || (codeline[i] == ',' && Is_Come))
                 {
                     Code_Location locationerror = new Code_Location(1, i);
-                    throw new Lexical_Error("!Invalid Token" + 
-                    "(" + locationerror.line + locationerror.column +")");
+                    throw new Lexical_Error(locationerror.codification);
                 }
                 if (codeline[i] == 'e') 
                 {
@@ -134,8 +133,7 @@ namespace HULK_COMPILER
                 if(char.IsLetter(codeline[i]))
                 {
                     Code_Location locationerror = new Code_Location(1, i);
-                    throw new Lexical_Error("!Invalid Token" + 
-                    "(" + locationerror.line + "," + locationerror.column +")");
+                    throw new Lexical_Error(locationerror.codification);
                 }
                 if (!char.IsLetterOrDigit(codeline[i]))
                 {

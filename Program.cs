@@ -4,7 +4,7 @@
     {
         static void Main(string[] args)
         {
-            string test = "let 14a = 5 in print(a);";
+            string test = "let a = 5 in print(a);";
             System.Console.WriteLine(test);
             List<Token> tokens = Tokenizer.GetTokens(test);
             foreach (var item in tokens)
