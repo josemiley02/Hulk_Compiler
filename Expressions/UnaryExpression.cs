@@ -14,18 +14,6 @@ namespace HULK_COMPILER
             return this.Value;
         }
     }
-    public class NumberExpression : Expression
-    {
-        public double Value;
-        public NumberExpression(double Value)
-        {
-            this.Value = Value;
-        }
-        public override double Evaluate()
-        {
-            return this.Value;
-        }
-    }
     public class LogExpression : UnaryExpression
     {
         public LogExpression(Expression arg) : base(arg)

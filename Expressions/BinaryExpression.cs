@@ -1,6 +1,6 @@
 namespace HULK_COMPILER
 {
-    public class BinaryExpression : Expression
+    public abstract class BinaryExpression : Expression
     {
         public Expression left; 
         public Expression right;
@@ -9,11 +9,6 @@ namespace HULK_COMPILER
         {
             this.left = left;
             this.right = right;
-        }
-
-        public override double Evaluate()
-        {
-            throw new NotImplementedException();
         }
     }
     //+

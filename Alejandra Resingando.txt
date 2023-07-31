@@ -1,0 +1,12 @@
+A = BZ | !BZ
+Z = and A | or A | e
+B = EW
+W = < E | > E | ==E | != E | e
+E = FX
+X = + E | - E | e
+F = TY
+Y = * F | / F | e
+T = int | (E) | true | false 
+
+(i - i) >= i
+(5 + 3) / (4 + 4)
