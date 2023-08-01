@@ -40,9 +40,9 @@ namespace HULK_COMPILER
             return this.left.Evaluate() <= this.right.Evaluate() ? 1 : 0;
         }
     }
-    public class EqualExpression : BinaryExpression
+    public class DoubleEqualExpression : BinaryExpression
     {
-        public EqualExpression(Expression left, Expression right) : base(left, right)
+        public DoubleEqualExpression(Expression left, Expression right) : base(left, right)
         {
         }
         public override double Evaluate()

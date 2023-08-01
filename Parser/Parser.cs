@@ -2,19 +2,37 @@ namespace HULK_COMPILER
 {
     public static class Parser
     {
-        /*L = A;
-        A = BZ | !BZ
-        Z = and A | or A | e
+        /*L = let id = A; | if(A)
+        A = BZ | !BZ | print(A)
+        Z =  and A | or A | e
         B = EW
-        W = < E | > E | ==E | != E | e
+        W = < E | > E | ==E | != E | = E |e
         E = FX
         X = + E | - E | e
         F = TY
         Y = * F | / F | e
-        T = int | (A) | true | false */
-        public static (int,Expression) L(List<Token> codeline, int ImHere)
+        T = int | (A) | true | false | id | log(E) | in A
+        */
+        public static Funtion? funtion;
+        public static (int, Expression) L(List<Token> codeline, int ImHere)
         {
-            (int, Expression) result_A = A(codeline, ImHere);
+
+            (int, Expression) result_A;
+            if (codeline[ImHere].Types == Token.TokenTypes.Token_Let)
+            {
+                if (codeline[ImHere + 1].Types == Token.TokenTypes.Identifiquer)
+                {
+                    if (codeline[ImHere + 2].Types == Token.TokenTypes.Token_Equal)
+                    {
+                        Token ID = codeline[ImHere + 1];
+                        result_A = A(codeline, ImHere + 3);
+                        Program.RAM!.Add(ID, result_A.Item2);
+                    }
+                    //throw ERROR!!!
+                }
+                //throw ERROR!!!
+            }
+            result_A = A(codeline, ImHere);
             if (codeline[result_A.Item1].Types == Token.TokenTypes.EndLine && result_A.Item1 == codeline.Count - 1)
             {
                 return result_A;
@@ -24,12 +42,17 @@ namespace HULK_COMPILER
         public static (int, Expression) A(List<Token> codeline, int ImHere, Expression last = null!)
         {
             (int, Expression) result_Z;
+            if (codeline[ImHere].Types == Token.TokenTypes.Print)
+            {
+                (int, Expression) result_A = A(codeline, ImHere + 1, last);
+                funtion = new Print(result_A.Item2);
+                return result_A;
+            }
             if (codeline[ImHere].Types == Token.TokenTypes.Token_Not)
             {
                 (int, Expression) result_B = B(codeline, ImHere + 1, last);
                 Expression root = new NotExpression(result_B.Item2);
                 result_Z = Z(codeline, result_B.Item1, root);
-
             }
             else
             {
@@ -58,7 +81,6 @@ namespace HULK_COMPILER
                     result_A = A(codeline, ImHere + 1, last);
                     Expression Or = new OrExpression(last, result_A.Item2);
                     return (result_A.Item1, Or);
-
                 default: return (ImHere, last);
             }
         }
@@ -95,7 +117,7 @@ namespace HULK_COMPILER
 
                 case (Token.TokenTypes.Token_DoubleEqual):
                     result_E = E(codeline, ImHere + 1, last);
-                    Expression Equal = new EqualExpression(last, result_E.Item2);
+                    Expression Equal = new DoubleEqualExpression(last, result_E.Item2);
                     return (result_E.Item1, Equal);
 
                 case (Token.TokenTypes.Token_NoEqual):
@@ -154,6 +176,26 @@ namespace HULK_COMPILER
         }
         public static (int, Expression) T(List<Token> codeline, int ImHere, Expression last)
         {
+            if (codeline[ImHere].Types == Token.TokenTypes.Token_Log)
+            {
+                (int, Expression) result_E = E(codeline, ImHere + 1, last);
+                return (result_E.Item1, new LogExpression(result_E.Item2));
+            }
+            if (codeline[ImHere].Types == Token.TokenTypes.Token_Sen)
+            {
+                (int, Expression) result_E = E(codeline, ImHere + 1, last);
+                return (result_E.Item1, new SenExpression(result_E.Item2));
+            }
+            if (codeline[ImHere].Types == Token.TokenTypes.Token_Cos)
+            {
+                (int, Expression) result_E = E(codeline, ImHere + 1, last);
+                return (result_E.Item1, new CosExpression(result_E.Item2));
+            }
+            if (codeline[ImHere].Types == Token.TokenTypes.Token_Tan)
+            {
+                (int, Expression) result_E = E(codeline, ImHere + 1, last);
+                return (result_E.Item1, new TanExpression(result_E.Item2));
+            }
             if (codeline[ImHere].Types == Token.TokenTypes.Number_Literals)
             {
                 return (ImHere + 1, new NumberExpression(double.Parse(codeline[ImHere].Value)));
@@ -165,6 +207,14 @@ namespace HULK_COMPILER
             if (codeline[ImHere].Types == Token.TokenTypes.Token_False)
             {
                 return (ImHere + 1, new TrueOrFalseExpression(false));
+            }
+            if (codeline[ImHere].Types == Token.TokenTypes.Identifiquer)
+            {
+                if (Program.RAM!.ContainsKey(codeline[ImHere]))
+                {
+                    return (ImHere + 1, new IdenExpression(codeline[ImHere]));
+                }
+                //throw Error
             }
             if (codeline[ImHere].Types == Token.TokenTypes.Open_Paren)
             {

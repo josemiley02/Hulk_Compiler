@@ -24,4 +24,18 @@ namespace HULK_COMPILER
             return this.Value ? 1 : 0;
         }
     }
+    public class IdenExpression : Expression
+    {
+        public Token ID;
+
+        public IdenExpression(Token iD)
+        {
+            ID = iD;
+        }
+
+        public override double Evaluate()
+        {
+            return Program.RAM![this.ID].Evaluate();
+        }
+    }
 }
