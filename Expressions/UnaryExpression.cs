@@ -21,7 +21,7 @@ namespace HULK_COMPILER
         }
         public override double Evaluate()
         {
-            return Math.Log2(this.Arg!.Evaluate());
+            return Math.Log10(this.Arg!.Evaluate());
         }
     }
     public class RootExpression : UnaryExpression
