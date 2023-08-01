@@ -27,6 +27,7 @@ namespace HULK_COMPILER
                         Token ID = codeline[ImHere + 1];
                         result_A = A(codeline, ImHere + 3);
                         Program.RAM!.Add(ID, result_A.Item2);
+                        ImHere = result_A.Item1;
                     }
                     //throw ERROR!!!
                 }
@@ -208,11 +209,15 @@ namespace HULK_COMPILER
             {
                 return (ImHere + 1, new TrueOrFalseExpression(false));
             }
+            if (codeline[ImHere].Types == Token.TokenTypes.Token_In && ImHere > 0)
+            {
+                return L(codeline, ImHere + 1);
+            }
             if (codeline[ImHere].Types == Token.TokenTypes.Identifiquer)
             {
-                if (Program.RAM!.ContainsKey(codeline[ImHere]))
+                foreach (var item in Program.RAM!.Keys)
                 {
-                    return (ImHere + 1, new IdenExpression(codeline[ImHere]));
+                    if(codeline[ImHere].Value == item.Value) return (ImHere + 1, new IdenExpression(item));
                 }
                 //throw Error
             }
