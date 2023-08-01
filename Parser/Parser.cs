@@ -10,7 +10,7 @@ namespace HULK_COMPILER
         E = FX
         X = + E | - E | e
         F = TY
-        Y = * F | / F | e
+        Y = * F | / F | ^ F | e
         T = int | (A) | true | false | id | log(E) | in A
         */
         public static Funtion? funtion;
@@ -173,6 +173,12 @@ namespace HULK_COMPILER
                 Expression mod = new ModExpression(last, result_F.Item2);
                 return (result_F.Item1, mod);
             }
+            if (codeline[ImHere].Types == Token.TokenTypes.Token_Exp)
+            {
+                result_F = F(codeline, ImHere + 1, last);
+                Expression exp = new ExpExpression(last, result_F.Item2);
+                return (result_F.Item1, exp);
+            }
             return (ImHere, last);
         }
         public static (int, Expression) T(List<Token> codeline, int ImHere, Expression last)
@@ -196,6 +202,11 @@ namespace HULK_COMPILER
             {
                 (int, Expression) result_E = E(codeline, ImHere + 1, last);
                 return (result_E.Item1, new TanExpression(result_E.Item2));
+            }
+            if (codeline[ImHere].Types == Token.TokenTypes.Token_Sqrt)
+            {
+                (int, Expression) result_E = E(codeline, ImHere + 1, last);
+                return (result_E.Item1, new RootExpression(result_E.Item2));
             }
             if (codeline[ImHere].Types == Token.TokenTypes.Number_Literals)
             {
