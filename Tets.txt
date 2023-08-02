@@ -1,12 +1,12 @@
-A = BZ | !BZ
-Z = and A | or A | e
+L = M;
+M = let id = MH | if M then M else M | print(M) | A
+H = in M | e
+A = BZ | !BZ 
+Z =  and A | or A | e
 B = EW
-W = < E | > E | ==E | != E | e
+W = < E | > E | ==E | != E | = E |e
 E = FX
 X = + E | - E | e
 F = TY
-Y = * F | / F | e
-T = int | (E) | true | false 
-
-(i - i) >= i
-(5 + 3) / (4 + 4)
+Y = * F | / F | ^ F | e
+T = int | (M) | true | false | id | func(E) 

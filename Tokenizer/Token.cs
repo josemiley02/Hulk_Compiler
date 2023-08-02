@@ -26,7 +26,7 @@ namespace HULK_COMPILER
             Token_Not, Token_And, Token_Or,
             WhiteSpace, Open_Paren, Close_Paren, Open_Block, Close_Block, Open_Key, Close_Key, EndLine,
             Identifiquer, Chain_Lietarls, Number_Literals, Print, Token_True, Token_False,
-            Token_Log, Token_Sen, Token_Cos, Token_Tan, Token_Cot, Token_Sqrt
+            Token_Log, Token_Sen, Token_Cos, Token_Tan, Token_Cot, Token_Sqrt, Token_PI
         }
         public TokenTypes Types;
         public string Value;
@@ -78,7 +78,8 @@ namespace HULK_COMPILER
             {"sqrt", new Token(TokenTypes.Token_Sqrt,"sqrt")},
             {"print", new Token(TokenTypes.Print,"print")},
             {"true", new Token(TokenTypes.Token_True, "true")},
-            {"false", new Token(TokenTypes.Token_False, "false")}
+            {"false", new Token(TokenTypes.Token_False, "false")},
+            {"PI", new Token(TokenTypes.Token_PI, "PI")}
         };
     }
 }
