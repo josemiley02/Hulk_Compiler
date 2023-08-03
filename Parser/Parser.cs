@@ -2,7 +2,7 @@ namespace HULK_COMPILER
 {
     public static class Parser
     {
-        public static Funtion? funtion;
+        public static bool IsFuntion;
         public static (int, Expression) L(List<Token> codeline, int ImHere)
         {
             (int, Expression) result_M = M(codeline, ImHere);
@@ -17,8 +17,19 @@ namespace HULK_COMPILER
             if (codeline[ImHere].Types == Token.TokenTypes.Print)
             {
                 (int, Expression) result_M = M(codeline, ImHere + 1, last);
-                funtion = new Print(result_M.Item2);
+                IsFuntion = true;
                 return result_M;
+            }
+            if (codeline[ImHere].Types == Token.TokenTypes.Token_If)
+            {
+                (int, Expression) if_expression = M(codeline, ImHere + 1, last);
+                (int, Expression) then_expression = M(codeline, if_expression.Item1, if_expression.Item2);
+                if (codeline[then_expression.Item1].Types == Token.TokenTypes.Token_Else)
+                {
+                    (int, Expression) else_expression = M(codeline, then_expression.Item1 + 1, then_expression.Item2);
+                    Expression condition = new Conditionals(if_expression.Item2, then_expression.Item2, else_expression.Item2);
+                    return (else_expression.Item1, condition);
+                }
             }
             if (codeline[ImHere].Types == Token.TokenTypes.Token_Let)
             {

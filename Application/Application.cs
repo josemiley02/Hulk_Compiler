@@ -17,9 +17,9 @@ namespace HULK_COMPILER
             {
                 List<Token> alfa = Tokenizer.GetTokens(line);
                 (int,Expression) alftexp = Parser.L(alfa,0);
-                if (Parser.funtion != null)
+                if (Parser.IsFuntion)
                 {
-                    Parser.funtion.DoIt();
+                    Funtion.DoIt(alftexp.Item2);
                 }
                 SelectKey();
             }
