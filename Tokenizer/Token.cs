@@ -26,7 +26,8 @@ namespace HULK_COMPILER
             Token_Not, Token_And, Token_Or,
             WhiteSpace, Open_Paren, Close_Paren, Open_Block, Close_Block, Open_Key, Close_Key, EndLine,
             Identifiquer, Chain_Lietarls, Number_Literals, Print, Token_True, Token_False,
-            Token_Log, Token_Sen, Token_Cos, Token_Tan, Token_Cot, Token_Sqrt, Token_PI
+            Token_Log, Token_Sen, Token_Cos, Token_Tan, Token_Cot, Token_Sqrt, Token_PI,
+            Token_SpaceLine, Token_LINQ
         }
         public TokenTypes Types;
         public string Value;
@@ -46,6 +47,7 @@ namespace HULK_COMPILER
             {"else",new Token(TokenTypes.Token_Else,"else")},
             {"then",new Token(TokenTypes.Token_Then,"then")},
             {"funtion",new Token(TokenTypes.Token_Funtion,"funtion")},
+            {"=>", new Token(TokenTypes.Token_LINQ, "=>")},
             {"+", new Token(TokenTypes.Token_Sum, "+")},
             {"-", new Token(TokenTypes.Token_Dif, "-")},
             {"*", new Token(TokenTypes.Token_Mult, "*")},
@@ -79,7 +81,8 @@ namespace HULK_COMPILER
             {"print", new Token(TokenTypes.Print,"print")},
             {"true", new Token(TokenTypes.Token_True, "true")},
             {"false", new Token(TokenTypes.Token_False, "false")},
-            {"PI", new Token(TokenTypes.Token_PI, "PI")}
+            {"PI", new Token(TokenTypes.Token_PI, "PI")},
+            {",", new Token(TokenTypes.Token_SpaceLine, ",")}
         };
     }
 }

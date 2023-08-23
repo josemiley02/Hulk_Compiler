@@ -1,6 +1,8 @@
 L = M;
-M = let id = MH | if M else M | print(M) | A
+M = let id = MH | if M else M | print(M) | funtion id (Q) => M |A
 H = in M | e
+Q = id | id , Q | e
+K = E | E , K | e
 A = BZ | !BZ 
 Z =  and A | or A | e
 B = EW
@@ -9,4 +11,4 @@ E = FX
 X = + E | - E | e
 F = TY
 Y = * F | / F | ^ F | e
-T = int | (M) | true | false | id | func(E) 
+T = int | (M) | true | false | id | func(K) 

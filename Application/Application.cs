@@ -4,6 +4,7 @@ namespace HULK_COMPILER
     {
         public static void WelcomeMessege()
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             System.Console.WriteLine("Welcome To Hulk!!!");
             System.Console.WriteLine("Write your code...");
             SelectKey();
@@ -20,6 +21,7 @@ namespace HULK_COMPILER
                 if (Parser.IsFuntion)
                 {
                     Funtion.DoIt(alftexp.Item2);
+                    Parser.IsFuntion = false;
                 }
                 SelectKey();
             }

@@ -17,8 +17,8 @@ namespace HULK_COMPILER
             if (codeline[ImHere].Types == Token.TokenTypes.Print)
             {
                 (int, Expression) result_M = M(codeline, ImHere + 1, last);
-                IsFuntion = true;
-                return result_M;
+                Expression print = new PrintExpression(result_M.Item2);
+                return (result_M.Item1, print);
             }
             if (codeline[ImHere].Types == Token.TokenTypes.Token_If)
             {
@@ -38,7 +38,7 @@ namespace HULK_COMPILER
                     Token ID = codeline[ImHere + 1];
                     if (codeline[ImHere + 2].Types == Token.TokenTypes.Token_Equal)
                     {
-                        (int, Expression)result_M = M(codeline, ImHere + 3, last);
+                        (int, Expression) result_M = M(codeline, ImHere + 3, last);
                         Program.RAM!.Add(ID, result_M.Item2);
                         ImHere = result_M.Item1;
                         last = result_M.Item2;
@@ -47,7 +47,62 @@ namespace HULK_COMPILER
                     throw new Syntax_Error($"Missing" + codeline[ImHere].Value + "in the expression");
                 }
             }
+            if (codeline[ImHere].Types == Token.TokenTypes.Token_Funtion)
+            {
+                if (codeline[ImHere + 1].Types == Token.TokenTypes.Identifiquer)
+                {
+                    Token token = codeline[ImHere + 1];
+                    if (codeline[ImHere + 2].Types == Token.TokenTypes.Open_Paren)
+                    {
+                        (int, List<Token>) result_Q = Q(codeline, ImHere + 3, new());
+                        ImHere = result_Q.Item1;
+                        if (codeline[ImHere].Types == Token.TokenTypes.Token_LINQ)
+                        {
+                            (int, Expression) result_M = M(codeline, ImHere + 1);
+                            Funtion func = new Funtion(token.Value, result_Q.Item2, result_M.Item2);
+                            Program.Statements.Add(token, func);
+                            return result_M;
+                        }
+                    }
+                    else throw new Lexical_Error("Missing ( in the expression");
+                }
+                else throw new Lexical_Error("Invalid Token " + codeline[ImHere].Value);
+            }
             return A(codeline, ImHere, last);
+        }
+        public static (int,List<Expression>) K(List<Token> codeline, int ImHere, List<Expression> expressions)
+        {
+            int temp = new();
+            for (int i = ImHere; i < codeline.Count; i++)
+            {
+                if(codeline[i].Types == Token.TokenTypes.EndLine)
+                {
+                    if(codeline[i - 1].Types == Token.TokenTypes.Close_Paren) return(i - 1, expressions);
+                }  
+                (int, Expression) result_E = E(codeline, i, null!);
+                expressions.Add(result_E.Item2);
+                i = result_E.Item1;
+                temp = i;
+            }
+            return (temp - 1, expressions);
+        }
+        public static (int, List<Token>) Q(List<Token> codeline, int ImHere, List<Token> cant)
+        {
+            if (codeline[ImHere].Types == Token.TokenTypes.Identifiquer)
+            {
+                Program.RAM!.Add(codeline[ImHere], null!);
+                cant.Add(codeline[ImHere]);
+                ImHere += 1;
+                if (codeline[ImHere].Types == Token.TokenTypes.Token_SpaceLine)
+                {
+                    return Q(codeline, ImHere + 1, cant);
+                }
+            }
+            if (codeline[ImHere].Types == Token.TokenTypes.Close_Paren && codeline[ImHere - 1].Types != Token.TokenTypes.Token_SpaceLine)
+            {
+                return (ImHere + 1, cant);
+            }
+            throw new Lexical_Error("Invalid Token " + codeline[ImHere].Value);
         }
         public static (int, Expression) H(List<Token> codeline, int ImHere, Expression last)
         {
@@ -239,7 +294,18 @@ namespace HULK_COMPILER
             {
                 foreach (var item in Program.RAM!.Keys)
                 {
-                    if(codeline[ImHere].Value == item.Value) return (ImHere + 1, new IdenExpression(item));
+                    if (codeline[ImHere].Value == item.Value) return (ImHere + 1, new IdenExpression(item));
+                }
+                foreach (var item in Program.Statements.Keys)
+                {
+                    if (item.Value == codeline[ImHere].Value)
+                    {
+                        Token func = codeline[ImHere];
+                        (int,List<Expression>) result_K = K(codeline, ImHere + 1, new());
+                        Expression funtion = new EvaluateFuntion(Program.Statements[item], result_K.Item2);
+                        IsFuntion = true;
+                        return (result_K.Item1 + 1, funtion);
+                    }
                 }
                 throw new Syntax_Error($"Invalid token" + codeline[ImHere] + "in the expression");
             }
@@ -251,6 +317,10 @@ namespace HULK_COMPILER
                     if (codeline[result_M.Item1].Types == Token.TokenTypes.Close_Paren)
                     {
                         return (result_M.Item1 + 1, result_M.Item2);
+                    }
+                    if (codeline[result_M.Item1].Types == Token.TokenTypes.Token_SpaceLine)
+                    {
+                        return (result_M.Item1, result_M.Item2);
                     }
                     throw new Syntax_Error("Missing closing parenthesis after " + codeline[result_M.Item1 - 1].Value);
                 }

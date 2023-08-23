@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Miguel\\Nueva carpeta\\Hulk_Compiler\\Hulk Compiler Jose Miguel Leyva De la Cruz.csproj",
+      "projectUniqueName": "C:\\Miguel\\Nueva carpeta\\HULK_Compiler\\Hulk_Compiler\\Hulk Compiler Jose Miguel Leyva De la Cruz.csproj",
       "projectName": "Hulk Compiler Jose Miguel Leyva De la Cruz",
-      "projectPath": "C:\\Miguel\\Nueva carpeta\\Hulk_Compiler\\Hulk Compiler Jose Miguel Leyva De la Cruz.csproj",
+      "projectPath": "C:\\Miguel\\Nueva carpeta\\HULK_Compiler\\Hulk_Compiler\\Hulk Compiler Jose Miguel Leyva De la Cruz.csproj",
       "packagesPath": "C:\\Users\\leyva\\.nuget\\packages\\",
-      "outputPath": "C:\\Miguel\\Nueva carpeta\\Hulk_Compiler\\obj\\",
+      "outputPath": "C:\\Miguel\\Nueva carpeta\\HULK_Compiler\\Hulk_Compiler\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Users\\leyva\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder"

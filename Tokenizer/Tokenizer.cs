@@ -11,6 +11,10 @@ namespace HULK_COMPILER
             {
                 if (codeline[i] == ';')
                 {
+                    if (temp != "")
+                    {
+                        tokens.Add(GetToken(temp));
+                    }
                     tokens.Add(new Token(Token.TokenTypes.EndLine, codeline[i].ToString()));
                     continue;
                 }
