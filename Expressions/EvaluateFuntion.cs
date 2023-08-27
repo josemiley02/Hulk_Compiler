@@ -10,7 +10,7 @@ namespace HULK_COMPILER
             Args = args;
             Funtion = funtion;
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
             if (Funtion.Cant_Arg.Count == Args.Count)
             {
@@ -30,7 +30,7 @@ namespace HULK_COMPILER
             this.toprint = toprint;
         }
         public Expression toprint;
-        public override double Evaluate()
+        public override string Evaluate()
         {
             return toprint.Evaluate();
         }

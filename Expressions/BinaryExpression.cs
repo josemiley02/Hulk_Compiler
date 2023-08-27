@@ -2,7 +2,7 @@ namespace HULK_COMPILER
 {
     public abstract class BinaryExpression : Expression
     {
-        public Expression left; 
+        public Expression left;
         public Expression right;
 
         public BinaryExpression(Expression left, Expression right)
@@ -17,9 +17,9 @@ namespace HULK_COMPILER
         public SumExpression(Expression left, Expression right) : base(left, right)
         {
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            return this.left.Evaluate() + this.right.Evaluate();
+            return (double.Parse(this.left.Evaluate()) + double.Parse(this.right.Evaluate())).ToString();
         }
     }
     //-
@@ -28,9 +28,9 @@ namespace HULK_COMPILER
         public RestExpression(Expression left, Expression right) : base(left, right)
         {
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            return this.left.Evaluate() - this.right.Evaluate();
+            return (double.Parse(this.left.Evaluate()) - double.Parse(this.right.Evaluate())).ToString();
         }
     }
     //*
@@ -39,9 +39,9 @@ namespace HULK_COMPILER
         public MultExpression(Expression left, Expression right) : base(left, right)
         {
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            return this.left.Evaluate() * this.right.Evaluate();
+            return (double.Parse(this.left.Evaluate()) * double.Parse(this.right.Evaluate())).ToString();
         }
     }
     // /
@@ -50,9 +50,9 @@ namespace HULK_COMPILER
         public DivExpression(Expression left, Expression right) : base(left, right)
         {
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            return this.left.Evaluate() / this.right.Evaluate();
+            return (double.Parse(this.left.Evaluate()) / double.Parse(this.right.Evaluate())).ToString();
         }
     }
     //^
@@ -61,9 +61,9 @@ namespace HULK_COMPILER
         public ExpExpression(Expression left, Expression right) : base(left, right)
         {
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            return Math.Pow(this.left.Evaluate(),this.right.Evaluate());
+            return Math.Pow(double.Parse(this.left.Evaluate()), double.Parse(this.right.Evaluate())).ToString();
         }
     }
     //%
@@ -72,9 +72,9 @@ namespace HULK_COMPILER
         public ModExpression(Expression left, Expression right) : base(left, right)
         {
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            return this.left.Evaluate() % this.right.Evaluate();
+            return (double.Parse(this.left.Evaluate()) % double.Parse(this.right.Evaluate())).ToString();
         }
     }
 }

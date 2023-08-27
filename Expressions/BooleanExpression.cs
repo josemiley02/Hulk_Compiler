@@ -5,9 +5,9 @@ namespace HULK_COMPILER
         public MoreExpression(Expression left, Expression right) : base(left, right)
         {
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            return this.left.Evaluate() > this.right.Evaluate() ? 1 : 0;
+            return (double.Parse(this.left.Evaluate()) > double.Parse(this.right.Evaluate())).ToString();
         }
     }
     public class MoreEqualExpression : BinaryExpression
@@ -15,9 +15,9 @@ namespace HULK_COMPILER
         public MoreEqualExpression(Expression left, Expression right) : base(left, right)
         {
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            return this.left.Evaluate() >= this.right.Evaluate() ? 1 : 0;
+            return (double.Parse(this.left.Evaluate()) >= double.Parse(this.right.Evaluate())).ToString();
         }
     }
     public class LessExpression : BinaryExpression
@@ -25,9 +25,9 @@ namespace HULK_COMPILER
         public LessExpression(Expression left, Expression right) : base(left, right)
         {
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            return this.left.Evaluate() < this.right.Evaluate() ? 1 : 0;
+            return (double.Parse(this.left.Evaluate()) < double.Parse(this.right.Evaluate())).ToString();
         }
     }
     public class LessEqualExpression : BinaryExpression
@@ -35,9 +35,9 @@ namespace HULK_COMPILER
         public LessEqualExpression(Expression left, Expression right) : base(left, right)
         {
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            return this.left.Evaluate() <= this.right.Evaluate() ? 1 : 0;
+            return (double.Parse(this.left.Evaluate()) <= double.Parse(this.right.Evaluate())).ToString();
         }
     }
     public class DoubleEqualExpression : BinaryExpression
@@ -45,9 +45,9 @@ namespace HULK_COMPILER
         public DoubleEqualExpression(Expression left, Expression right) : base(left, right)
         {
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            return this.left.Evaluate() == this.right.Evaluate() ? 1 : 0;
+            return (this.left.Evaluate() == this.right.Evaluate()).ToString();
         }
     }
     public class NotEqualExpression : BinaryExpression
@@ -55,9 +55,9 @@ namespace HULK_COMPILER
         public NotEqualExpression(Expression left, Expression right) : base(left, right)
         {
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            return this.left.Evaluate() != this.right.Evaluate() ? 1 : 0;
+            return (this.left.Evaluate() != this.right.Evaluate()).ToString();
         }
     }
     public class AndExpression : BinaryExpression
@@ -65,9 +65,9 @@ namespace HULK_COMPILER
         public AndExpression(Expression left, Expression right) : base(left, right)
         {
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            return this.left.Evaluate() == 1 && this.right.Evaluate() == 1 ? 1 : 0;
+            return (this.left.Evaluate() == "True" && this.right.Evaluate() == "True").ToString();
         }
     }
     public class OrExpression : BinaryExpression
@@ -75,9 +75,9 @@ namespace HULK_COMPILER
         public OrExpression(Expression left, Expression right) : base(left, right)
         {
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            return this.left.Evaluate() == 1 || this.right.Evaluate() == 1 ? 1 : 0;
+            return (this.left.Evaluate() == "True" || this.right.Evaluate() == "True").ToString();
         }
     }
     public class NotExpression : UnaryExpression
@@ -85,9 +85,9 @@ namespace HULK_COMPILER
         public NotExpression(Expression arg) : base(arg)
         {
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            return this.Evaluate() == 0 ? 1 : 0;
+            return this.Arg!.Evaluate() == "False" ? "True" : "Talse";
         }
     }
 }

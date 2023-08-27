@@ -286,6 +286,10 @@ namespace HULK_COMPILER
                 (int, Expression) result_E = E(codeline, ImHere + 1, last);
                 return (result_E.Item1, new RootExpression(result_E.Item2));
             }
+            if (codeline[ImHere].Types == Token.TokenTypes.Chain_Lietarls)
+            {
+                return(ImHere + 1, new ChainExpression(codeline[ImHere].Value));
+            }
             if (codeline[ImHere].Types == Token.TokenTypes.Token_PI)
             {
                 return (ImHere + 1, new NumberExpression(Math.PI));

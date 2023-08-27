@@ -13,9 +13,11 @@ namespace HULK_COMPILER
             Else_Part = else_Part;
         }
 
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            if (this.If_Part.Evaluate() == 1)
+            string result_IF = this.If_Part.Evaluate();
+            if(result_IF != "True" && result_IF != "False") throw new Exception();
+            if (result_IF == "True")
             {
                 return this.Then_Part.Evaluate();
             }

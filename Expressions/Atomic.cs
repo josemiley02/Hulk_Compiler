@@ -7,9 +7,9 @@ namespace HULK_COMPILER
         {
             this.Value = Value;
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            return this.Value;
+            return this.Value.ToString();
         }
     }
     public class TrueOrFalseExpression : Expression
@@ -19,9 +19,9 @@ namespace HULK_COMPILER
         {
             this.Value = Value;
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            return this.Value ? 1 : 0;
+            return this.Value.ToString();
         }
     }
     public class IdenExpression : Expression
@@ -33,9 +33,21 @@ namespace HULK_COMPILER
             ID = iD;
         }
 
-        public override double Evaluate()
+        public override string Evaluate()
         {
             return Program.RAM![this.ID].Evaluate();
+        }
+    }
+    public class ChainExpression : Expression
+    {
+        string value;
+        public ChainExpression(string Value)
+        {
+            value = Value;
+        }
+        public override string Evaluate()
+        {
+            return value;
         }
     }
 }

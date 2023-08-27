@@ -37,7 +37,7 @@ namespace HULK_COMPILER
                     (int, string) string_result = GetString(codeline, i + 1);
                     temp = string_result.Item2;
                     tokens.Add(new Token(Token.TokenTypes.Chain_Lietarls, temp));
-                    i += string_result.Item1 - 1;
+                    i = string_result.Item1;
                     temp = "";
                     continue;
                 }
@@ -102,14 +102,12 @@ namespace HULK_COMPILER
         private static (int, string) GetString(string codeline, int index)
         {
             string result = "";
-            int new_index = 0;
             while (codeline[index] != '\"')
             {
                 result += codeline[index];
                 index += 1;
-                new_index += 1;
             }
-            return (new_index, result);
+            return (index, result);
         }
         private static (string, int) GetNumber(string codeline, int index)
         {

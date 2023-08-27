@@ -9,9 +9,9 @@ namespace HULK_COMPILER
         {
             this.Arg = arg;
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            return this.Value;
+            return this.Value.ToString();
         }
     }
     public class LogExpression : UnaryExpression
@@ -19,9 +19,9 @@ namespace HULK_COMPILER
         public LogExpression(Expression arg) : base(arg)
         {
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            return Math.Log10(this.Arg!.Evaluate());
+            return Math.Log10(double.Parse(this.Arg!.Evaluate())).ToString();
         }
     }
     public class RootExpression : UnaryExpression
@@ -29,9 +29,9 @@ namespace HULK_COMPILER
         public RootExpression(Expression arg) : base(arg)
         {
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            return Math.Sqrt(this.Arg!.Evaluate());
+            return Math.Sqrt(double.Parse(this.Arg!.Evaluate())).ToString();
         }
     }
     public class SenExpression : UnaryExpression
@@ -39,9 +39,9 @@ namespace HULK_COMPILER
         public SenExpression(Expression arg) : base(arg)
         {
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            return Math.Sin(this.Arg!.Evaluate());
+            return Math.Sin(double.Parse(this.Arg!.Evaluate())).ToString();
         }
     }
     public class CosExpression : UnaryExpression
@@ -49,9 +49,9 @@ namespace HULK_COMPILER
         public CosExpression(Expression arg) : base(arg)
         {
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            return Math.Cos(this.Arg!.Evaluate());
+            return Math.Cos(double.Parse(this.Arg!.Evaluate())).ToString();
         }
     }
     public class TanExpression : UnaryExpression
@@ -59,9 +59,9 @@ namespace HULK_COMPILER
         public TanExpression(Expression arg) : base(arg)
         {
         }
-        public override double Evaluate()
+        public override string Evaluate()
         {
-            return Math.Tan(this.Arg!.Evaluate());
+            return Math.Tan(double.Parse(this.Arg!.Evaluate())).ToString();
         }
     }
 }

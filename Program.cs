@@ -6,13 +6,9 @@
         public static Dictionary<Token, Funtion> Statements = new Dictionary<Token, Funtion>();
         static void Main(string[] args)
         {
-            string a = "funtion main(a,b) => (a * a) / (b * b);";
-            string b = "main(2,4);";
-            List<Token> tokens1 = Tokenizer.GetTokens(a);
-            List<Token> tokens2 = Tokenizer.GetTokens(b);
-            (int,Expression) exp1 = Parser.L(tokens1,0);
-            (int,Expression) exp2 = Parser.L(tokens2,0);
-            Funtion.DoIt(exp2.Item2);
+            List<Token> tokens = Tokenizer.GetTokens("print((1 == 0) || (2 == 2));");
+            (int, Expression) exp = Parser.L(tokens, 0);
+            Funtion.DoIt(exp.Item2);
             Application.WelcomeMessege();
         }
     }
