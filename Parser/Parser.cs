@@ -3,6 +3,7 @@ namespace HULK_COMPILER
     public static class Parser
     {
         public static bool IsFuntion;
+        public static bool Declarate_Funtion;
         public static (int, Expression) L(List<Token> codeline, int ImHere)
         {
             (int, Expression) result_M = M(codeline, ImHere);
@@ -18,6 +19,7 @@ namespace HULK_COMPILER
             {
                 (int, Expression) result_M = M(codeline, ImHere + 1, last);
                 Expression print = new PrintExpression(result_M.Item2);
+                if (!Declarate_Funtion) IsFuntion = true;
                 return (result_M.Item1, print);
             }
             if (codeline[ImHere].Types == Token.TokenTypes.Token_If)
@@ -58,6 +60,7 @@ namespace HULK_COMPILER
                         ImHere = result_Q.Item1;
                         if (codeline[ImHere].Types == Token.TokenTypes.Token_LINQ)
                         {
+                            Declarate_Funtion = true;
                             (int, Expression) result_M = M(codeline, ImHere + 1);
                             Funtion func = new Funtion(token.Value, result_Q.Item2, result_M.Item2);
                             Program.Statements.Add(token, func);
@@ -70,21 +73,30 @@ namespace HULK_COMPILER
             }
             return A(codeline, ImHere, last);
         }
-        public static (int,List<Expression>) K(List<Token> codeline, int ImHere, List<Expression> expressions)
+        public static (int, List<Expression>) K(List<Token> codeline, int ImHere, List<Expression> expressions)
         {
-            int temp = new();
+            List<Token> sub_tokens = new();
+            (int, Expression) result_L;
             for (int i = ImHere; i < codeline.Count; i++)
             {
-                if(codeline[i].Types == Token.TokenTypes.EndLine)
+                if (codeline[i].Types == Token.TokenTypes.Token_SpaceLine)
                 {
-                    if(codeline[i - 1].Types == Token.TokenTypes.Close_Paren) return(i - 1, expressions);
-                }  
-                (int, Expression) result_E = E(codeline, i, null!);
-                expressions.Add(result_E.Item2);
-                i = result_E.Item1;
-                temp = i;
+                    sub_tokens.Add(new Token(Token.TokenTypes.EndLine, ";"));
+                    result_L = L(sub_tokens, 0);
+                    expressions.Add(result_L.Item2);
+                    sub_tokens = new();
+                    i += 1;
+                }
+                if (codeline[i].Types == Token.TokenTypes.Close_Paren && sub_tokens.Count != 0)
+                {
+                    sub_tokens.Add(new Token(Token.TokenTypes.EndLine, ";"));
+                    result_L = L(sub_tokens, 0);
+                    expressions.Add(result_L.Item2);
+                    return (i, expressions);
+                }
+                sub_tokens.Add(codeline[i]);
             }
-            return (temp - 1, expressions);
+            throw new Lexical_Error("Invalid Expression");
         }
         public static (int, List<Token>) Q(List<Token> codeline, int ImHere, List<Token> cant)
         {
@@ -300,11 +312,18 @@ namespace HULK_COMPILER
                 {
                     if (item.Value == codeline[ImHere].Value)
                     {
-                        Token func = codeline[ImHere];
-                        (int,List<Expression>) result_K = K(codeline, ImHere + 1, new());
-                        Expression funtion = new EvaluateFuntion(Program.Statements[item], result_K.Item2);
-                        IsFuntion = true;
-                        return (result_K.Item1 + 1, funtion);
+                        if (codeline[ImHere + 1].Types == Token.TokenTypes.Open_Paren)
+                        {
+                            Token func = codeline[ImHere];
+
+                            (int, List<Expression>) result_K = K(codeline, ImHere + 2, new());
+
+                            Expression funtion = new EvaluateFuntion(Program.Statements[item], result_K.Item2);
+
+                            if (!Declarate_Funtion) IsFuntion = true;
+
+                            return (result_K.Item1 + 1, funtion);
+                        }
                     }
                 }
                 throw new Syntax_Error($"Invalid token" + codeline[ImHere] + "in the expression");

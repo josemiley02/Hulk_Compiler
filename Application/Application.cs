@@ -23,6 +23,8 @@ namespace HULK_COMPILER
                     Funtion.DoIt(alftexp.Item2);
                     Parser.IsFuntion = false;
                 }
+                Parser.Declarate_Funtion = false;
+                Program.RAM = new();
                 SelectKey();
             }
             if (key == ConsoleKey.Escape)

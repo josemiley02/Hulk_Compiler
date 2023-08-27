@@ -119,25 +119,23 @@ namespace HULK_COMPILER
             bool Is_Come = false;
             for (int i = index; i < codeline.Length; i++)
             {
-                if ((codeline[i] == 'e' && IsE) || (codeline[i] == ',' && Is_Come))
+                if ((codeline[i] == 'e' && IsE) || (codeline[i] == '.' && Is_Come))
                 {
-                    Code_Location locationerror = new Code_Location(1, i);
-                    throw new Lexical_Error(locationerror.codification);
+                    throw new Lexical_Error("Invalid Token");
                 }
                 if (codeline[i] == 'e') 
                 {
                     IsE = true;
-                    continue;
                 }
-                if (codeline[i] == ',') 
+                if (codeline[i] == '.') 
                 {
                     Is_Come = true;
+                    result += ',';
                     continue;
                 }
                 if(char.IsLetter(codeline[i]))
                 {
-                    Code_Location locationerror = new Code_Location(1, i);
-                    throw new Lexical_Error(locationerror.codification);
+                    throw new Lexical_Error("Invalid Token");
                 }
                 if (!char.IsLetterOrDigit(codeline[i]))
                 {
