@@ -18,19 +18,22 @@ namespace HULK_COMPILER
             {
                 List<Token> alfa = Tokenizer.GetTokens(line);
                 (int,Expression) alftexp = Parser.L(alfa,0);
-                if (Parser.IsFuntion)
+                if (!Parser.Declarate_Funtion)
                 {
-                    Funtion.DoIt(alftexp.Item2);
-                    Parser.IsFuntion = false;
+                    DoIt(alftexp.Item2);
+                    Program.RAM = new();
                 }
                 Parser.Declarate_Funtion = false;
-                Program.RAM = new();
                 SelectKey();
             }
             if (key == ConsoleKey.Escape)
             {
                 Environment.Exit(0);
             }
+        }
+        public static void DoIt(Expression expression)
+        {
+            System.Console.WriteLine(expression.Evaluate());
         }
     }
 }

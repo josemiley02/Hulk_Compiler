@@ -12,10 +12,5 @@ namespace HULK_COMPILER
             Cant_Arg = cant_Arg;
             Body = body;
         }
-
-        public static void DoIt(Expression expression)
-        {
-            System.Console.WriteLine(expression.Evaluate());
-        }
     }
 }
