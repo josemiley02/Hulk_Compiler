@@ -22,6 +22,11 @@ namespace HULK_COMPILER
             }
             throw new NotImplementedException();
         }
+
+        public override string Semantic_Walk()
+        {
+           return Funtion.Body.Semantic_Walk();
+        }
     }
     public class PrintExpression : Expression
     {
@@ -33,6 +38,11 @@ namespace HULK_COMPILER
         public override string Evaluate()
         {
             return toprint.Evaluate();
+        }
+
+        public override string Semantic_Walk()
+        {
+            return toprint.Semantic_Walk();
         }
     }
 }

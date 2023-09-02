@@ -11,6 +11,17 @@ namespace HULK_COMPILER
         {
             return this.Value.ToString();
         }
+
+        public override string Semantic_Walk()
+        {
+            string result = Value.GetType().ToString();
+            string To_return = "";
+            for (int i = result.Length - 1; result[i] != '.' ; i--)
+            {
+                To_return = result[i] + To_return;
+            }
+            return To_return;
+        }
     }
     public class TrueOrFalseExpression : Expression
     {
@@ -22,6 +33,17 @@ namespace HULK_COMPILER
         public override string Evaluate()
         {
             return this.Value.ToString();
+        }
+
+        public override string Semantic_Walk()
+        {
+            string result = Value.GetType().ToString();
+            string To_return = "";
+            for (int i = result.Length - 1; result[i] != '.' ; i--)
+            {
+                To_return = result[i] + To_return;
+            }
+            return To_return;
         }
     }
     public class IdenExpression : Expression
@@ -37,6 +59,11 @@ namespace HULK_COMPILER
         {
             return Program.RAM![this.ID].Evaluate();
         }
+
+        public override string Semantic_Walk()
+        {
+            return Program.RAM![ID].Semantic_Walk();
+        }
     }
     public class ChainExpression : Expression
     {
@@ -48,6 +75,17 @@ namespace HULK_COMPILER
         public override string Evaluate()
         {
             return value;
+        }
+
+        public override string Semantic_Walk()
+        {
+            string result = value.GetType().ToString();
+            string To_return = "";
+            for (int i = result.Length - 1; result[i] != '.' ; i--)
+            {
+                To_return = result[i] + To_return;
+            }
+            return To_return;
         }
     }
 }

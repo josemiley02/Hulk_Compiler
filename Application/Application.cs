@@ -18,6 +18,14 @@ namespace HULK_COMPILER
             {
                 List<Token> alfa = Tokenizer.GetTokens(line);
                 (int,Expression) alftexp = Parser.L(alfa,0);
+                try
+                {
+                    string semantic_analyse = alftexp.Item2.Semantic_Walk();
+                }
+                catch (HULK_COMPILER.Semantic_Error)
+                {
+                    throw;
+                }
                 if (!Parser.Declarate_Funtion)
                 {
                     DoIt(alftexp.Item2);

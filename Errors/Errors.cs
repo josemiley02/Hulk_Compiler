@@ -30,4 +30,12 @@ namespace HULK_COMPILER
             this.message = message;
         }
     }
+    public class Semantic_Error : Exception
+    {
+        public string message {get; set;}
+        public Semantic_Error(string message) : base(message)
+        {
+            this.message = message;
+        }
+    }
 }
