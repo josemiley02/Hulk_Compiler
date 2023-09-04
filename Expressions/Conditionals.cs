@@ -12,7 +12,6 @@ namespace HULK_COMPILER
             Then_Part = then_Part;
             Else_Part = else_Part;
         }
-
         public override string Evaluate()
         {
             if (this.If_Part.Evaluate() == "True")

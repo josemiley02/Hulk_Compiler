@@ -49,20 +49,21 @@ namespace HULK_COMPILER
     public class IdenExpression : Expression
     {
         public Token ID;
+        public Expression Value;
 
-        public IdenExpression(Token iD)
+        public IdenExpression(Token iD, Expression value)
         {
             ID = iD;
+            Value = value;
         }
-
         public override string Evaluate()
         {
-            return Program.RAM![this.ID].Evaluate();
+            return Value.Evaluate();
         }
 
         public override string Semantic_Walk()
         {
-            return Program.RAM![ID].Semantic_Walk();
+            return Value.Semantic_Walk();
         }
     }
     public class ChainExpression : Expression
@@ -76,7 +77,6 @@ namespace HULK_COMPILER
         {
             return value;
         }
-
         public override string Semantic_Walk()
         {
             string result = value.GetType().ToString();

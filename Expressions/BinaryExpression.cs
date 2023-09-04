@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 namespace HULK_COMPILER
 {
     public abstract class BinaryExpression : Expression
@@ -17,6 +19,7 @@ namespace HULK_COMPILER
         public SumExpression(Expression left, Expression right) : base(left, right)
         {
         }
+
         public override string Evaluate()
         {
             return (double.Parse(this.left.Evaluate()) + double.Parse(this.right.Evaluate())).ToString();
@@ -42,6 +45,7 @@ namespace HULK_COMPILER
         public RestExpression(Expression left, Expression right) : base(left, right)
         {
         }
+
         public override string Evaluate()
         {
             return (double.Parse(this.left.Evaluate()) - double.Parse(this.right.Evaluate())).ToString();
@@ -66,6 +70,7 @@ namespace HULK_COMPILER
         public MultExpression(Expression left, Expression right) : base(left, right)
         {
         }
+
         public override string Evaluate()
         {
             return (double.Parse(this.left.Evaluate()) * double.Parse(this.right.Evaluate())).ToString();
@@ -90,6 +95,7 @@ namespace HULK_COMPILER
         public DivExpression(Expression left, Expression right) : base(left, right)
         {
         }
+
         public override string Evaluate()
         {
             return (double.Parse(this.left.Evaluate()) / double.Parse(this.right.Evaluate())).ToString();
@@ -138,6 +144,7 @@ namespace HULK_COMPILER
         public ModExpression(Expression left, Expression right) : base(left, right)
         {
         }
+
         public override string Evaluate()
         {
             return (double.Parse(this.left.Evaluate()) % double.Parse(this.right.Evaluate())).ToString();

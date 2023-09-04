@@ -5,6 +5,7 @@ namespace HULK_COMPILER
         public MoreExpression(Expression left, Expression right) : base(left, right)
         {
         }
+
         public override string Evaluate()
         {
             return (double.Parse(this.left.Evaluate()) > double.Parse(this.right.Evaluate())).ToString();
@@ -28,6 +29,7 @@ namespace HULK_COMPILER
         public MoreEqualExpression(Expression left, Expression right) : base(left, right)
         {
         }
+
         public override string Evaluate()
         {
             return (double.Parse(this.left.Evaluate()) >= double.Parse(this.right.Evaluate())).ToString();
@@ -51,6 +53,7 @@ namespace HULK_COMPILER
         public LessExpression(Expression left, Expression right) : base(left, right)
         {
         }
+
         public override string Evaluate()
         {
             return (double.Parse(this.left.Evaluate()) < double.Parse(this.right.Evaluate())).ToString();
@@ -97,6 +100,7 @@ namespace HULK_COMPILER
         public DoubleEqualExpression(Expression left, Expression right) : base(left, right)
         {
         }
+
         public override string Evaluate()
         {
             return (this.left.Evaluate() == this.right.Evaluate()).ToString();
@@ -120,6 +124,7 @@ namespace HULK_COMPILER
         public NotEqualExpression(Expression left, Expression right) : base(left, right)
         {
         }
+
         public override string Evaluate()
         {
             return (this.left.Evaluate() != this.right.Evaluate()).ToString();
@@ -143,6 +148,7 @@ namespace HULK_COMPILER
         public AndExpression(Expression left, Expression right) : base(left, right)
         {
         }
+
         public override string Evaluate()
         {
             return (this.left.Evaluate() == "True" && this.right.Evaluate() == "True").ToString();
@@ -166,6 +172,7 @@ namespace HULK_COMPILER
         public OrExpression(Expression left, Expression right) : base(left, right)
         {
         }
+
         public override string Evaluate()
         {
             return (this.left.Evaluate() == "True" || this.right.Evaluate() == "True").ToString();
@@ -191,7 +198,7 @@ namespace HULK_COMPILER
         }
         public override string Evaluate()
         {
-            return this.Arg!.Evaluate() == "False" ? "True" : "Talse";
+            return this.Arg!.Evaluate() == "False" ? "True" : "False";
         }
         public override string Semantic_Walk()
         {
@@ -205,5 +212,6 @@ namespace HULK_COMPILER
                 throw new Semantic_Error("The funtion Cos not work wiht a " + result_Arg);
             }
         }
+        
     }
 }

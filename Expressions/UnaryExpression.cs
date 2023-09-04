@@ -1,6 +1,6 @@
 namespace HULK_COMPILER
 {
-    public class UnaryExpression : Expression
+    public abstract class UnaryExpression : Expression
     {
         public double Value;
         public Expression? Arg;
@@ -8,15 +8,6 @@ namespace HULK_COMPILER
         public UnaryExpression(Expression arg)
         {
             this.Arg = arg;
-        }
-        public override string Evaluate()
-        {
-            return this.Value.ToString();
-        }
-
-        public override string Semantic_Walk()
-        {
-            return this.Arg!.Semantic_Walk();
         }
     }
     public class LogExpression : UnaryExpression
