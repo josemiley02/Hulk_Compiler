@@ -10,6 +10,7 @@ namespace HULK_COMPILER
             this.target = target;
             this.asig = asig;
         }
+        
         public override string Semantic_Walk()
         {
             throw new NotImplementedException();
@@ -17,6 +18,12 @@ namespace HULK_COMPILER
         public override string Evaluate()
         {
             throw new NotImplementedException();
+        }
+
+        public override Scope GetScope(Scope actual)
+        {
+            actual.Corpus_Values.Add(target, asig);
+            return null!;
         }
     }
     public class LetInExpression : Expression
@@ -32,6 +39,14 @@ namespace HULK_COMPILER
         public override string Evaluate()
         {
             throw new NotImplementedException();
+        }
+
+        public override Scope GetScope(Scope actual)
+        {
+            let_part.GetScope(actual);
+            Scope scope = new Scope(actual,new List<Scope>(),new Dictionary<Token, Expression>());
+            actual.Childrens.Add(after_in.GetScope(scope));
+            return actual;
         }
 
         public override string Semantic_Walk()

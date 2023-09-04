@@ -28,6 +28,25 @@ namespace HULK_COMPILER
             throw new NotImplementedException();
         }
 
+        public override Scope GetScope(Scope actual)
+        {
+            Scope scope = new Scope(actual, new(), new());
+            for (int i = 0; i < expressions.Count; i++)
+            {
+                try
+                {
+                    scope.Corpus_Values.Add(funtion.Cant_Arg[i], expressions[i]);
+                }
+                catch (System.IndexOutOfRangeException)
+                {
+                    
+                    throw;
+                }
+            }
+            actual.Childrens.Add(scope);
+            return actual;
+        }
+
         public override string Semantic_Walk()
         {
             throw new NotImplementedException();
@@ -48,6 +67,11 @@ namespace HULK_COMPILER
         public override string Semantic_Walk()
         {
             return toprint.Semantic_Walk();
+        }
+
+        public override Scope GetScope(Scope actual)
+        {
+            return toprint.GetScope(actual);
         }
     }
 }

@@ -19,6 +19,13 @@ namespace HULK_COMPILER
         {
             return Math.Log10(double.Parse(this.Arg!.Evaluate())).ToString();
         }
+
+        public override Scope GetScope(Scope actual)
+        {
+            actual.Childrens.Add(Arg!.GetScope(actual));
+            return null!;
+        }
+
         public override string Semantic_Walk()
         {
             string result_Arg = Arg!.Semantic_Walk();
@@ -36,6 +43,11 @@ namespace HULK_COMPILER
     {
         public RootExpression(Expression arg) : base(arg)
         {
+        }
+        public override Scope GetScope(Scope actual)
+        {
+            actual.Childrens.Add(Arg!.GetScope(actual));
+            return null!;
         }
         public override string Evaluate()
         {
@@ -59,6 +71,11 @@ namespace HULK_COMPILER
         public SenExpression(Expression arg) : base(arg)
         {
         }
+        public override Scope GetScope(Scope actual)
+        {
+            actual.Childrens.Add(Arg!.GetScope(actual));
+            return null!;
+        }
         public override string Evaluate()
         {
             return Math.Sin(double.Parse(this.Arg!.Evaluate())).ToString();
@@ -81,6 +98,11 @@ namespace HULK_COMPILER
         public CosExpression(Expression arg) : base(arg)
         {
         }
+        public override Scope GetScope(Scope actual)
+        {
+            actual.Childrens.Add(Arg!.GetScope(actual));
+            return null!;
+        }
         public override string Evaluate()
         {
             return Math.Cos(double.Parse(this.Arg!.Evaluate())).ToString();
@@ -102,6 +124,11 @@ namespace HULK_COMPILER
     {
         public TanExpression(Expression arg) : base(arg)
         {
+        }
+        public override Scope GetScope(Scope actual)
+        {
+            actual.Childrens.Add(Arg!.GetScope(actual));
+            return null!;
         }
         public override string Evaluate()
         {

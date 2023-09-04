@@ -12,6 +12,11 @@ namespace HULK_COMPILER
             return this.Value.ToString();
         }
 
+        public override Scope GetScope(Scope actual)
+        {
+            return null!;
+        }
+
         public override string Semantic_Walk()
         {
             string result = Value.GetType().ToString();
@@ -33,6 +38,11 @@ namespace HULK_COMPILER
         public override string Evaluate()
         {
             return this.Value.ToString();
+        }
+
+        public override Scope GetScope(Scope actual)
+        {
+            return null!;
         }
 
         public override string Semantic_Walk()
@@ -61,6 +71,11 @@ namespace HULK_COMPILER
             return Value.Evaluate();
         }
 
+        public override Scope GetScope(Scope actual)
+        {
+            return null!;
+        }
+
         public override string Semantic_Walk()
         {
             return Value.Semantic_Walk();
@@ -77,6 +92,12 @@ namespace HULK_COMPILER
         {
             return value;
         }
+
+        public override Scope GetScope(Scope actual)
+        {
+            return null!;
+        }
+
         public override string Semantic_Walk()
         {
             string result = value.GetType().ToString();
