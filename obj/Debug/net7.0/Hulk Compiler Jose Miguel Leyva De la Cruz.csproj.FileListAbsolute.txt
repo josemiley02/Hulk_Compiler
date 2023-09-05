@@ -28,3 +28,18 @@ C:\Miguel\Nueva carpeta\HULK_Compiler\Hulk_Compiler\obj\Debug\net7.0\refint\Hulk
 C:\Miguel\Nueva carpeta\HULK_Compiler\Hulk_Compiler\obj\Debug\net7.0\Hulk Compiler Jose Miguel Leyva De la Cruz.pdb
 C:\Miguel\Nueva carpeta\HULK_Compiler\Hulk_Compiler\obj\Debug\net7.0\Hulk Compiler Jose Miguel Leyva De la Cruz.genruntimeconfig.cache
 C:\Miguel\Nueva carpeta\HULK_Compiler\Hulk_Compiler\obj\Debug\net7.0\ref\Hulk Compiler Jose Miguel Leyva De la Cruz.dll
+C:\Miguel\Nueva carpeta\Hulk_Compiler - copia\bin\Debug\net7.0\Hulk Compiler Jose Miguel Leyva De la Cruz.exe
+C:\Miguel\Nueva carpeta\Hulk_Compiler - copia\bin\Debug\net7.0\Hulk Compiler Jose Miguel Leyva De la Cruz.deps.json
+C:\Miguel\Nueva carpeta\Hulk_Compiler - copia\bin\Debug\net7.0\Hulk Compiler Jose Miguel Leyva De la Cruz.runtimeconfig.json
+C:\Miguel\Nueva carpeta\Hulk_Compiler - copia\bin\Debug\net7.0\Hulk Compiler Jose Miguel Leyva De la Cruz.dll
+C:\Miguel\Nueva carpeta\Hulk_Compiler - copia\bin\Debug\net7.0\Hulk Compiler Jose Miguel Leyva De la Cruz.pdb
+C:\Miguel\Nueva carpeta\Hulk_Compiler - copia\obj\Debug\net7.0\Hulk Compiler Jose Miguel Leyva De la Cruz.csproj.AssemblyReference.cache
+C:\Miguel\Nueva carpeta\Hulk_Compiler - copia\obj\Debug\net7.0\Hulk Compiler Jose Miguel Leyva De la Cruz.GeneratedMSBuildEditorConfig.editorconfig
+C:\Miguel\Nueva carpeta\Hulk_Compiler - copia\obj\Debug\net7.0\Hulk Compiler Jose Miguel Leyva De la Cruz.AssemblyInfoInputs.cache
+C:\Miguel\Nueva carpeta\Hulk_Compiler - copia\obj\Debug\net7.0\Hulk Compiler Jose Miguel Leyva De la Cruz.AssemblyInfo.cs
+C:\Miguel\Nueva carpeta\Hulk_Compiler - copia\obj\Debug\net7.0\Hulk Compiler Jose Miguel Leyva De la Cruz.csproj.CoreCompileInputs.cache
+C:\Miguel\Nueva carpeta\Hulk_Compiler - copia\obj\Debug\net7.0\Hulk Compiler Jose Miguel Leyva De la Cruz.dll
+C:\Miguel\Nueva carpeta\Hulk_Compiler - copia\obj\Debug\net7.0\refint\Hulk Compiler Jose Miguel Leyva De la Cruz.dll
+C:\Miguel\Nueva carpeta\Hulk_Compiler - copia\obj\Debug\net7.0\Hulk Compiler Jose Miguel Leyva De la Cruz.pdb
+C:\Miguel\Nueva carpeta\Hulk_Compiler - copia\obj\Debug\net7.0\Hulk Compiler Jose Miguel Leyva De la Cruz.genruntimeconfig.cache
+C:\Miguel\Nueva carpeta\Hulk_Compiler - copia\obj\Debug\net7.0\ref\Hulk Compiler Jose Miguel Leyva De la Cruz.dll

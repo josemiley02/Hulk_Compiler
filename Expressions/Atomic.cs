@@ -12,16 +12,16 @@ namespace HULK_COMPILER
             return this.Value.ToString();
         }
 
-        public override Scope GetScope(Scope actual)
+        public override void GetScope(Scope actual)
         {
-            return null!;
+            return;
         }
 
         public override string Semantic_Walk()
         {
             string result = Value.GetType().ToString();
             string To_return = "";
-            for (int i = result.Length - 1; result[i] != '.' ; i--)
+            for (int i = result.Length - 1; result[i] != '.'; i--)
             {
                 To_return = result[i] + To_return;
             }
@@ -40,16 +40,16 @@ namespace HULK_COMPILER
             return this.Value.ToString();
         }
 
-        public override Scope GetScope(Scope actual)
+        public override void GetScope(Scope actual)
         {
-            return null!;
+            return;
         }
 
         public override string Semantic_Walk()
         {
             string result = Value.GetType().ToString();
             string To_return = "";
-            for (int i = result.Length - 1; result[i] != '.' ; i--)
+            for (int i = result.Length - 1; result[i] != '.'; i--)
             {
                 To_return = result[i] + To_return;
             }
@@ -60,6 +60,7 @@ namespace HULK_COMPILER
     {
         public Token ID;
         public Expression Value;
+        private Scope Here = new(null!, new(), new());
 
         public IdenExpression(Token iD, Expression value)
         {
@@ -68,17 +69,40 @@ namespace HULK_COMPILER
         }
         public override string Evaluate()
         {
-            return Value.Evaluate();
+            foreach (var item in Here.Corpus_Values.Keys)
+            {
+                if (item.Value == ID.Value)
+                {
+                    return Here.Corpus_Values[item].Evaluate();
+                }
+            }
+            throw new();
         }
 
-        public override Scope GetScope(Scope actual)
+        public override void GetScope(Scope actual)
         {
-            return null!;
+            if (actual.Father == null) throw new Semantic_Error("NOT");
+            foreach (var item in actual.Father.Declared_Type.Keys)
+            {
+                if (item.Value == ID.Value)
+                {
+                    Here = actual.Father;
+                    return;
+                }
+            }
+            GetScope(actual.Father);
         }
 
         public override string Semantic_Walk()
         {
-            return Value.Semantic_Walk();
+            foreach (var item in Here.Declared_Type.Keys)
+            {
+                if (item.Value == ID.Value)
+                {
+                    return Here.Declared_Type[item];
+                }
+            }
+            throw new Exception();
         }
     }
     public class ChainExpression : Expression
@@ -93,16 +117,16 @@ namespace HULK_COMPILER
             return value;
         }
 
-        public override Scope GetScope(Scope actual)
+        public override void GetScope(Scope actual)
         {
-            return null!;
+            return;
         }
 
         public override string Semantic_Walk()
         {
             string result = value.GetType().ToString();
             string To_return = "";
-            for (int i = result.Length - 1; result[i] != '.' ; i--)
+            for (int i = result.Length - 1; result[i] != '.'; i--)
             {
                 To_return = result[i] + To_return;
             }

@@ -4,26 +4,44 @@ namespace HULK_COMPILER
     {
         Token target;
         Expression asig;
+        Scope? where;
 
         public AsigExpression(Token target, Expression asig)
         {
             this.target = target;
             this.asig = asig;
         }
-        
+
         public override string Semantic_Walk()
         {
-            throw new NotImplementedException();
+            foreach (var item in where!.Declared_Type.Keys)
+            {
+                if (item.Value == target.Value)
+                {
+                    where.Declared_Type[item] = asig.Semantic_Walk();
+                    return where.Declared_Type[item];
+                }
+            }
+            throw new();
         }
         public override string Evaluate()
         {
-            throw new NotImplementedException();
+            foreach (var item in where!.Declared_Type.Keys)
+            {
+                if (item.Value == target.Value)
+                {
+                    where.Corpus_Values.Add(target, asig);
+                    return where.Corpus_Values[target].Evaluate();
+                }
+            }
+            throw new();
         }
 
-        public override Scope GetScope(Scope actual)
+        public override void GetScope(Scope actual)
         {
-            actual.Corpus_Values.Add(target, asig);
-            return null!;
+            actual.Declared_Type.Add(target, null!);
+            asig.GetScope(actual);
+            where = actual;
         }
     }
     public class LetInExpression : Expression
@@ -38,20 +56,21 @@ namespace HULK_COMPILER
 
         public override string Evaluate()
         {
-            throw new NotImplementedException();
+            let_part.Evaluate();
+            return after_in.Evaluate();
         }
 
-        public override Scope GetScope(Scope actual)
+        public override void GetScope(Scope actual)
         {
             let_part.GetScope(actual);
-            Scope scope = new Scope(actual,new List<Scope>(),new Dictionary<Token, Expression>());
-            actual.Childrens.Add(after_in.GetScope(scope));
-            return actual;
+            Scope next = new Scope(actual, new(), new());
+            after_in.GetScope(next);
         }
 
         public override string Semantic_Walk()
         {
-            throw new NotImplementedException();
+            let_part.Semantic_Walk();
+            return after_in.Semantic_Walk();
         }
     }
 }

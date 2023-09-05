@@ -29,7 +29,6 @@ namespace HULK_COMPILER
                 if (!Parser.Declarate_Funtion)
                 {
                     DoIt(alftexp.Item2);
-                    Program.RAM = new();
                 }
                 Parser.Declarate_Funtion = false;
                 SelectKey();

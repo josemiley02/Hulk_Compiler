@@ -21,12 +21,11 @@ namespace HULK_COMPILER
             return this.Else_Part.Evaluate();
         }
 
-        public override Scope GetScope(Scope actual)
+        public override void GetScope(Scope actual)
         {
-            actual.Childrens.Add(If_Part.GetScope(actual));
-            actual.Childrens.Add(Then_Part.GetScope(actual));
-            actual.Childrens.Add(Else_Part.GetScope(actual));
-            return actual;
+            If_Part.GetScope(actual);
+            Then_Part.GetScope(actual);
+            Else_Part.GetScope(actual);
         }
 
         public override string Semantic_Walk()

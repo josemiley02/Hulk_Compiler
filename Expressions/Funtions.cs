@@ -1,6 +1,6 @@
 namespace HULK_COMPILER
 {
-    public class Funtion
+    public class Funtion : Expression
     {
         public string Name;
         public List<Token> Cant_Arg;
@@ -12,12 +12,32 @@ namespace HULK_COMPILER
             Cant_Arg = cant_Arg;
             Body = body;
         }
+
+        public override string Evaluate()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void GetScope(Scope actual)
+        {
+            foreach (var item in Cant_Arg)
+            {
+                actual.Declared_Type.Add(item, null!);
+            }
+            Scope next = new Scope(actual, new(), new());
+            Body.GetScope(next);
+        }
+
+        public override string Semantic_Walk()
+        {
+            return "Funtion Declared";
+        }
     }
     public class FunCallExpression : Expression
     {
         Funtion funtion;
         List<Expression> expressions;
-        public FunCallExpression (Funtion funtion, List<Expression> expressions)
+        public FunCallExpression(Funtion funtion, List<Expression> expressions)
         {
             this.expressions = expressions;
             this.funtion = funtion;
@@ -28,23 +48,13 @@ namespace HULK_COMPILER
             throw new NotImplementedException();
         }
 
-        public override Scope GetScope(Scope actual)
+        public override void GetScope(Scope actual)
         {
-            Scope scope = new Scope(actual, new(), new());
-            for (int i = 0; i < expressions.Count; i++)
+            foreach (var item in expressions)
             {
-                try
-                {
-                    scope.Corpus_Values.Add(funtion.Cant_Arg[i], expressions[i]);
-                }
-                catch (System.IndexOutOfRangeException)
-                {
-                    
-                    throw;
-                }
+                item.GetScope(actual);
             }
-            actual.Childrens.Add(scope);
-            return actual;
+            return;
         }
 
         public override string Semantic_Walk()
@@ -69,9 +79,9 @@ namespace HULK_COMPILER
             return toprint.Semantic_Walk();
         }
 
-        public override Scope GetScope(Scope actual)
+        public override void GetScope(Scope actual)
         {
-            return toprint.GetScope(actual);
+            toprint.GetScope(actual);
         }
     }
 }

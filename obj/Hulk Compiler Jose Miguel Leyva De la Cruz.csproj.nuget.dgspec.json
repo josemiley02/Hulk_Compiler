@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Miguel\\Nueva carpeta\\Hulk_Compiler\\Hulk Compiler Jose Miguel Leyva De la Cruz.csproj": {}
+    "C:\\Miguel\\Nueva carpeta\\Hulk_Compiler - copia\\Hulk Compiler Jose Miguel Leyva De la Cruz.csproj": {}
   },
   "projects": {
-    "C:\\Miguel\\Nueva carpeta\\Hulk_Compiler\\Hulk Compiler Jose Miguel Leyva De la Cruz.csproj": {
+    "C:\\Miguel\\Nueva carpeta\\Hulk_Compiler - copia\\Hulk Compiler Jose Miguel Leyva De la Cruz.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Miguel\\Nueva carpeta\\Hulk_Compiler\\Hulk Compiler Jose Miguel Leyva De la Cruz.csproj",
+        "projectUniqueName": "C:\\Miguel\\Nueva carpeta\\Hulk_Compiler - copia\\Hulk Compiler Jose Miguel Leyva De la Cruz.csproj",
         "projectName": "Hulk Compiler Jose Miguel Leyva De la Cruz",
-        "projectPath": "C:\\Miguel\\Nueva carpeta\\Hulk_Compiler\\Hulk Compiler Jose Miguel Leyva De la Cruz.csproj",
+        "projectPath": "C:\\Miguel\\Nueva carpeta\\Hulk_Compiler - copia\\Hulk Compiler Jose Miguel Leyva De la Cruz.csproj",
         "packagesPath": "C:\\Users\\leyva\\.nuget\\packages\\",
-        "outputPath": "C:\\Miguel\\Nueva carpeta\\Hulk_Compiler\\obj\\",
+        "outputPath": "C:\\Miguel\\Nueva carpeta\\Hulk_Compiler - copia\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Users\\leyva\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder"

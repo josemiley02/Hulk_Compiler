@@ -25,13 +25,11 @@ namespace HULK_COMPILER
             return (double.Parse(this.left.Evaluate()) + double.Parse(this.right.Evaluate())).ToString();
         }
 
-        public override Scope GetScope(Scope actual)
+        public override void GetScope(Scope actual)
         {
-            Scope left_scope = left.GetScope(actual);
-            Scope right_scope = right.GetScope(actual);
-            if(left_scope != null) actual.Childrens.Add(left_scope);
-            if(right_scope != null) actual.Childrens.Add(right_scope);
-            return null!;
+            left.GetScope(actual);
+            right.GetScope(actual);
+            return;
         }
 
         public override string Semantic_Walk()
@@ -54,14 +52,13 @@ namespace HULK_COMPILER
         public RestExpression(Expression left, Expression right) : base(left, right)
         {
         }
-        public override Scope GetScope(Scope actual)
+        public override void GetScope(Scope actual)
         {
-            Scope left_scope = left.GetScope(actual);
-            Scope right_scope = right.GetScope(actual);
-            if(left_scope != null) actual.Childrens.Add(left_scope);
-            if(right_scope != null) actual.Childrens.Add(right_scope);
-            return null!;
+            left.GetScope(actual);
+            right.GetScope(actual);
+            return;
         }
+
         public override string Evaluate()
         {
             return (double.Parse(this.left.Evaluate()) - double.Parse(this.right.Evaluate())).ToString();
@@ -91,14 +88,13 @@ namespace HULK_COMPILER
         {
             return (double.Parse(this.left.Evaluate()) * double.Parse(this.right.Evaluate())).ToString();
         }
-        public override Scope GetScope(Scope actual)
+        public override void GetScope(Scope actual)
         {
-            Scope left_scope = left.GetScope(actual);
-            Scope right_scope = right.GetScope(actual);
-            if(left_scope != null) actual.Childrens.Add(left_scope);
-            if(right_scope != null) actual.Childrens.Add(right_scope);
-            return null!;
+            left.GetScope(actual);
+            right.GetScope(actual);
+            return;
         }
+
         public override string Semantic_Walk()
         {
             string a = left.Semantic_Walk();
@@ -119,14 +115,13 @@ namespace HULK_COMPILER
         public DivExpression(Expression left, Expression right) : base(left, right)
         {
         }
-        public override Scope GetScope(Scope actual)
+        public override void GetScope(Scope actual)
         {
-            Scope left_scope = left.GetScope(actual);
-            Scope right_scope = right.GetScope(actual);
-            if(left_scope != null) actual.Childrens.Add(left_scope);
-            if(right_scope != null) actual.Childrens.Add(right_scope);
-            return null!;
+            left.GetScope(actual);
+            right.GetScope(actual);
+            return;
         }
+
         public override string Evaluate()
         {
             return (double.Parse(this.left.Evaluate()) / double.Parse(this.right.Evaluate())).ToString();
@@ -151,14 +146,13 @@ namespace HULK_COMPILER
         public ExpExpression(Expression left, Expression right) : base(left, right)
         {
         }
-        public override Scope GetScope(Scope actual)
+        public override void GetScope(Scope actual)
         {
-            Scope left_scope = left.GetScope(actual);
-            Scope right_scope = right.GetScope(actual);
-            if(left_scope != null) actual.Childrens.Add(left_scope);
-            if(right_scope != null) actual.Childrens.Add(right_scope);
-            return null!;
+            left.GetScope(actual);
+            right.GetScope(actual);
+            return;
         }
+
         public override string Evaluate()
         {
             return Math.Pow(double.Parse(this.left.Evaluate()), double.Parse(this.right.Evaluate())).ToString();
@@ -183,14 +177,13 @@ namespace HULK_COMPILER
         public ModExpression(Expression left, Expression right) : base(left, right)
         {
         }
-        public override Scope GetScope(Scope actual)
+        public override void GetScope(Scope actual)
         {
-            Scope left_scope = left.GetScope(actual);
-            Scope right_scope = right.GetScope(actual);
-            if(left_scope != null) actual.Childrens.Add(left_scope);
-            if(right_scope != null) actual.Childrens.Add(right_scope);
-            return null!;
+            left.GetScope(actual);
+            right.GetScope(actual);
+            return;
         }
+
         public override string Evaluate()
         {
             return (double.Parse(this.left.Evaluate()) % double.Parse(this.right.Evaluate())).ToString();

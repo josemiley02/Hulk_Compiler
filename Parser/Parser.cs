@@ -65,7 +65,7 @@ namespace HULK_COMPILER
                             Program.Funtions.Add(func);
                             (int, Expression) result_M = M(codeline, ImHere + 1);
                             func.Body = result_M.Item2;
-                            return result_M;
+                            return (result_M.Item1, func);
                         }
                     }
                     else throw new Lexical_Error("Missing ( in the expression");
@@ -103,7 +103,6 @@ namespace HULK_COMPILER
         {
             if (codeline[ImHere].Types == Token.TokenTypes.Identifiquer)
             {
-                Program.RAM!.Add(codeline[ImHere], null!);
                 cant.Add(codeline[ImHere]);
                 ImHere += 1;
                 if (codeline[ImHere].Types == Token.TokenTypes.Token_SpaceLine)
