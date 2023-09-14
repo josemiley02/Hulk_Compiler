@@ -12,7 +12,7 @@ namespace HULK_COMPILER
             this.asig = asig;
         }
 
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
             foreach (var item in where!.Declared_Type.Keys)
             {
@@ -30,8 +30,9 @@ namespace HULK_COMPILER
             {
                 if (item.Value == target.Value)
                 {
-                    where.Corpus_Values.Add(target, asig);
-                    return where.Corpus_Values[target].Evaluate();
+                    string result = asig.Evaluate();
+                    where.Corpus_Values.Add(target, result);
+                    return result;
                 }
             }
             throw new();
@@ -39,7 +40,7 @@ namespace HULK_COMPILER
 
         public override void GetScope(Scope actual)
         {
-            actual.Declared_Type.Add(target, null!);
+            actual.Declared_Type.Add(target, Scope.Declared.NoAsig);
             asig.GetScope(actual);
             where = actual;
         }
@@ -67,7 +68,7 @@ namespace HULK_COMPILER
             after_in.GetScope(next);
         }
 
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
             let_part.Semantic_Walk();
             return after_in.Semantic_Walk();

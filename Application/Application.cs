@@ -13,34 +13,39 @@ namespace HULK_COMPILER
         {
             System.Console.Write(">>>");
             string line = Console.ReadLine()!;
-            ConsoleKey key = Console.ReadKey(true).Key;;
+            ConsoleKey key = Console.ReadKey(true).Key;
             if (key == ConsoleKey.Enter)
             {
-                List<Token> alfa = Tokenizer.GetTokens(line);
-                (int,Expression) alftexp = Parser.L(alfa,0);
-                try
-                {
-                    string semantic_analyse = alftexp.Item2.Semantic_Walk();
-                }
-                catch (HULK_COMPILER.Semantic_Error)
-                {
-                    throw;
-                }
+                var exp = Parser.L(Tokenizer.GetTokens(line), 0);
+                Scope scope = Program.Global;
+                exp.Item2.GetScope(scope);
                 if (!Parser.Declarate_Funtion)
                 {
-                    DoIt(alftexp.Item2);
+                    try
+                    {
+                        exp.Item2.Semantic_Walk();
+                    }
+                    catch (HULK_COMPILER.Semantic_Error)
+                    {
+                        throw;
+                    }
+                    try
+                    {
+                        System.Console.WriteLine(exp.Item2.Evaluate());
+                    }
+                    catch (System.Exception)
+                    {
+                        throw;
+                    }
                 }
                 Parser.Declarate_Funtion = false;
                 SelectKey();
             }
             if (key == ConsoleKey.Escape)
             {
+                Console.ForegroundColor = ConsoleColor.White;
                 Environment.Exit(0);
             }
-        }
-        public static void DoIt(Expression expression)
-        {
-            System.Console.WriteLine(expression.Evaluate());
         }
     }
 }

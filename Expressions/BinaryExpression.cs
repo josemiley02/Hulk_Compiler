@@ -32,11 +32,15 @@ namespace HULK_COMPILER
             return;
         }
 
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            string a = left.Semantic_Walk();
-            string b = right.Semantic_Walk();
-            if (a == "Double" && b == "Double")
+            var a = left.Semantic_Walk();
+            var b = right.Semantic_Walk();
+            if (a == Scope.Declared.Double && b == Scope.Declared.Double)
+            {
+                return a;
+            }
+            if (a == Scope.Declared.NoAsig || b == Scope.Declared.NoAsig)
             {
                 return a;
             }
@@ -63,11 +67,15 @@ namespace HULK_COMPILER
         {
             return (double.Parse(this.left.Evaluate()) - double.Parse(this.right.Evaluate())).ToString();
         }
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            string a = left.Semantic_Walk();
-            string b = right.Semantic_Walk();
-            if (a == "Double" && b == "Double")
+            var a = left.Semantic_Walk();
+            var b = right.Semantic_Walk();
+            if (a == Scope.Declared.Double && b == Scope.Declared.Double)
+            {
+                return a;
+            }
+            if (a == Scope.Declared.NoAsig || b == Scope.Declared.NoAsig)
             {
                 return a;
             }
@@ -95,11 +103,15 @@ namespace HULK_COMPILER
             return;
         }
 
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            string a = left.Semantic_Walk();
-            string b = right.Semantic_Walk();
-            if (a == "Double" && b == "Double")
+            var a = left.Semantic_Walk();
+            var b = right.Semantic_Walk();
+            if (a == Scope.Declared.Double && b == Scope.Declared.Double)
+            {
+                return a;
+            }
+            if (a == Scope.Declared.NoAsig || b == Scope.Declared.NoAsig)
             {
                 return a;
             }
@@ -126,11 +138,15 @@ namespace HULK_COMPILER
         {
             return (double.Parse(this.left.Evaluate()) / double.Parse(this.right.Evaluate())).ToString();
         }
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            string a = left.Semantic_Walk();
-            string b = right.Semantic_Walk();
-            if (a == "Double" && b == "Double")
+            var a = left.Semantic_Walk();
+            var b = right.Semantic_Walk();
+            if (a == Scope.Declared.Double && b == Scope.Declared.Double)
+            {
+                return a;
+            }
+            if (a == Scope.Declared.NoAsig || b == Scope.Declared.NoAsig)
             {
                 return a;
             }
@@ -157,11 +173,15 @@ namespace HULK_COMPILER
         {
             return Math.Pow(double.Parse(this.left.Evaluate()), double.Parse(this.right.Evaluate())).ToString();
         }
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            string a = left.Semantic_Walk();
-            string b = right.Semantic_Walk();
-            if (a == "Double" && b == "Double")
+            var a = left.Semantic_Walk();
+            var b = right.Semantic_Walk();
+            if (a == Scope.Declared.Double && b == Scope.Declared.Double)
+            {
+                return a;
+            }
+            if (a == Scope.Declared.NoAsig || b == Scope.Declared.NoAsig)
             {
                 return a;
             }
@@ -188,11 +208,15 @@ namespace HULK_COMPILER
         {
             return (double.Parse(this.left.Evaluate()) % double.Parse(this.right.Evaluate())).ToString();
         }
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            string a = left.Semantic_Walk();
-            string b = right.Semantic_Walk();
-            if (a == "Double" && b == "Double")
+            var a = left.Semantic_Walk();
+            var b = right.Semantic_Walk();
+            if (a == Scope.Declared.Double && b == Scope.Declared.Double)
+            {
+                return a;
+            }
+            if (a == Scope.Declared.NoAsig || b == Scope.Declared.NoAsig)
             {
                 return a;
             }

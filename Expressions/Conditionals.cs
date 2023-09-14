@@ -28,15 +28,15 @@ namespace HULK_COMPILER
             Else_Part.GetScope(actual);
         }
 
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            if (If_Part.Semantic_Walk() == "Boolean")
+            if (If_Part.Semantic_Walk() == Scope.Declared.Boolean)
             {
                 try
                 {
-                    string result_then = Then_Part.Semantic_Walk();
-                    string result_else = Else_Part.Semantic_Walk();
-                    return "Conditional";
+                    var result_then = Then_Part.Semantic_Walk();
+                    var result_else = Else_Part.Semantic_Walk();
+                    return Scope.Declared.NoAsig;
                 }
                 catch (HULK_COMPILER.Semantic_Error)
                 {

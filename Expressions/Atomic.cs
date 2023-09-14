@@ -17,15 +17,9 @@ namespace HULK_COMPILER
             return;
         }
 
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            string result = Value.GetType().ToString();
-            string To_return = "";
-            for (int i = result.Length - 1; result[i] != '.'; i--)
-            {
-                To_return = result[i] + To_return;
-            }
-            return To_return;
+            return Scope.Declared.Double;
         }
     }
     public class TrueOrFalseExpression : Expression
@@ -45,22 +39,16 @@ namespace HULK_COMPILER
             return;
         }
 
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            string result = Value.GetType().ToString();
-            string To_return = "";
-            for (int i = result.Length - 1; result[i] != '.'; i--)
-            {
-                To_return = result[i] + To_return;
-            }
-            return To_return;
+            return Scope.Declared.Boolean;
         }
     }
     public class IdenExpression : Expression
     {
         public Token ID;
         public Expression Value;
-        private Scope Here = new(null!, new(), new());
+        private Scope? Here;
 
         public IdenExpression(Token iD, Expression value)
         {
@@ -69,11 +57,11 @@ namespace HULK_COMPILER
         }
         public override string Evaluate()
         {
-            foreach (var item in Here.Corpus_Values.Keys)
+            foreach (var item in Here!.Corpus_Values.Keys)
             {
                 if (item.Value == ID.Value)
                 {
-                    return Here.Corpus_Values[item].Evaluate();
+                    return Here.Corpus_Values[item];
                 }
             }
             throw new();
@@ -93,9 +81,9 @@ namespace HULK_COMPILER
             GetScope(actual.Father);
         }
 
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            foreach (var item in Here.Declared_Type.Keys)
+            foreach (var item in Here!.Declared_Type.Keys)
             {
                 if (item.Value == ID.Value)
                 {
@@ -122,15 +110,9 @@ namespace HULK_COMPILER
             return;
         }
 
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            string result = value.GetType().ToString();
-            string To_return = "";
-            for (int i = result.Length - 1; result[i] != '.'; i--)
-            {
-                To_return = result[i] + To_return;
-            }
-            return To_return;
+            return Scope.Declared.String;
         }
     }
 }

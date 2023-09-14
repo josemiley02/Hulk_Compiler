@@ -25,10 +25,10 @@ namespace HULK_COMPILER
             Arg!.GetScope(actual);
         }
 
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            string result_Arg = Arg!.Semantic_Walk();
-            if (result_Arg == "Double")
+            var result_Arg = Arg!.Semantic_Walk();
+            if (result_Arg == Scope.Declared.Double)
             {
                 return result_Arg;
             }
@@ -51,16 +51,16 @@ namespace HULK_COMPILER
         {
             return Math.Sqrt(double.Parse(this.Arg!.Evaluate())).ToString();
         }
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            string result_Arg = Arg!.Semantic_Walk();
-            if (result_Arg == "Double")
+            var result_Arg = Arg!.Semantic_Walk();
+            if (result_Arg == Scope.Declared.Double)
             {
                 return result_Arg;
             }
             else
             {
-                throw new Semantic_Error("The funtion Root not work wiht a " + result_Arg);
+                throw new Semantic_Error("The funtion Log not work wiht a " + result_Arg);
             }
         }
     }
@@ -77,16 +77,16 @@ namespace HULK_COMPILER
         {
             return Math.Sin(double.Parse(this.Arg!.Evaluate())).ToString();
         }
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            string result_Arg = Arg!.Semantic_Walk();
-            if (result_Arg == "Double")
+            var result_Arg = Arg!.Semantic_Walk();
+            if (result_Arg == Scope.Declared.Double)
             {
                 return result_Arg;
             }
             else
             {
-                throw new Semantic_Error("The funtion Sin not work wiht a " + result_Arg);
+                throw new Semantic_Error("The funtion Log not work wiht a " + result_Arg);
             }
         }
     }
@@ -103,16 +103,16 @@ namespace HULK_COMPILER
         {
             return Math.Cos(double.Parse(this.Arg!.Evaluate())).ToString();
         }
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            string result_Arg = Arg!.Semantic_Walk();
-            if (result_Arg == "Double")
+            var result_Arg = Arg!.Semantic_Walk();
+            if (result_Arg == Scope.Declared.Double)
             {
                 return result_Arg;
             }
             else
             {
-                throw new Semantic_Error("The funtion Cos not work wiht a " + result_Arg);
+                throw new Semantic_Error("The funtion Log not work wiht a " + result_Arg);
             }
         }
     }
@@ -129,16 +129,16 @@ namespace HULK_COMPILER
         {
             return Math.Tan(double.Parse(this.Arg!.Evaluate())).ToString();
         }
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            string result_Arg = Arg!.Semantic_Walk();
-            if (result_Arg == "Double")
+            var result_Arg = Arg!.Semantic_Walk();
+            if (result_Arg == Scope.Declared.Double)
             {
                 return result_Arg;
             }
             else
             {
-                throw new Semantic_Error("The funtion Tan not work wiht a " + result_Arg);
+                throw new Semantic_Error("The funtion Log not work wiht a " + result_Arg);
             }
         }
     }

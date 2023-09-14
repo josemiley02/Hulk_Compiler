@@ -46,7 +46,7 @@ namespace HULK_COMPILER
             {"while", new Token(TokenTypes.Token_While,"while")},
             {"else",new Token(TokenTypes.Token_Else,"else")},
             {"then",new Token(TokenTypes.Token_Then,"then")},
-            {"funtion",new Token(TokenTypes.Token_Funtion,"funtion")},
+            {"function",new Token(TokenTypes.Token_Funtion,"function")},
             {"=>", new Token(TokenTypes.Token_LINQ, "=>")},
             {"+", new Token(TokenTypes.Token_Sum, "+")},
             {"-", new Token(TokenTypes.Token_Dif, "-")},

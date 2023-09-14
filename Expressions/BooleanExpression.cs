@@ -17,13 +17,13 @@ namespace HULK_COMPILER
         {
             return (double.Parse(this.left.Evaluate()) > double.Parse(this.right.Evaluate())).ToString();
         }
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            string a = left.Semantic_Walk();
-            string b = right.Semantic_Walk();
-            if (a == "Double" && b == "Double")
+            var a = left.Semantic_Walk();
+            var b = right.Semantic_Walk();
+            if (a == Scope.Declared.Double && b == Scope.Declared.Double)
             {
-                return "Boolean";
+                return Scope.Declared.Boolean;
             }
             else
             {
@@ -47,13 +47,13 @@ namespace HULK_COMPILER
         {
             return (double.Parse(this.left.Evaluate()) >= double.Parse(this.right.Evaluate())).ToString();
         }
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            string a = left.Semantic_Walk();
-            string b = right.Semantic_Walk();
-            if (a == "Double" && b == "Double")
+            var a = left.Semantic_Walk();
+            var b = right.Semantic_Walk();
+            if (a == Scope.Declared.Double && b == Scope.Declared.Double)
             {
-                return "Boolean";
+                return Scope.Declared.Boolean;
             }
             else
             {
@@ -77,13 +77,13 @@ namespace HULK_COMPILER
         {
             return (double.Parse(this.left.Evaluate()) < double.Parse(this.right.Evaluate())).ToString();
         }
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            string a = left.Semantic_Walk();
-            string b = right.Semantic_Walk();
-            if (a == "Double" && b == "Double")
+            var a = left.Semantic_Walk();
+            var b = right.Semantic_Walk();
+            if (a == Scope.Declared.Double && b == Scope.Declared.Double)
             {
-                return "Boolean";
+                return Scope.Declared.Boolean;
             }
             else
             {
@@ -107,13 +107,13 @@ namespace HULK_COMPILER
         {
             return (double.Parse(this.left.Evaluate()) <= double.Parse(this.right.Evaluate())).ToString();
         }
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            string a = left.Semantic_Walk();
-            string b = right.Semantic_Walk();
-            if (a == "Double" && b == "Double")
+            var a = left.Semantic_Walk();
+            var b = right.Semantic_Walk();
+            if (a == Scope.Declared.Double && b == Scope.Declared.Double)
             {
-                return "Boolean";
+                return Scope.Declared.Boolean;
             }
             else
             {
@@ -137,13 +137,13 @@ namespace HULK_COMPILER
         {
             return (this.left.Evaluate() == this.right.Evaluate()).ToString();
         }
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            string a = left.Semantic_Walk();
-            string b = right.Semantic_Walk();
+            var a = left.Semantic_Walk();
+            var b = right.Semantic_Walk();
             if (a == b)
             {
-                return "Boolean";
+                return Scope.Declared.Boolean;
             }
             else
             {
@@ -167,13 +167,13 @@ namespace HULK_COMPILER
         {
             return (this.left.Evaluate() != this.right.Evaluate()).ToString();
         }
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            string a = left.Semantic_Walk();
-            string b = right.Semantic_Walk();
+            var a = left.Semantic_Walk();
+            var b = right.Semantic_Walk();
             if (a == b)
             {
-                return "Boolean";
+                return Scope.Declared.Boolean;
             }
             else
             {
@@ -197,13 +197,13 @@ namespace HULK_COMPILER
         {
             return (this.left.Evaluate() == "True" && this.right.Evaluate() == "True").ToString();
         }
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            string a = left.Semantic_Walk();
-            string b = right.Semantic_Walk();
-            if (a == "Boolean" && b == "Boolean")
+            var a = left.Semantic_Walk();
+            var b = right.Semantic_Walk();
+            if (a == Scope.Declared.Boolean && b == Scope.Declared.Boolean)
             {
-                return "Boolean";
+                return Scope.Declared.Boolean;
             }
             else
             {
@@ -227,13 +227,13 @@ namespace HULK_COMPILER
         {
             return (this.left.Evaluate() == "True" || this.right.Evaluate() == "True").ToString();
         }
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            string a = left.Semantic_Walk();
-            string b = right.Semantic_Walk();
-            if (a == "Boolean" && b == "Boolean")
+            var a = left.Semantic_Walk();
+            var b = right.Semantic_Walk();
+            if (a == Scope.Declared.Boolean && b == Scope.Declared.Boolean)
             {
-                return "Boolean";
+                return Scope.Declared.Boolean;
             }
             else
             {
@@ -257,10 +257,10 @@ namespace HULK_COMPILER
             return;
         }
 
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            string result_Arg = Arg!.Semantic_Walk();
-            if (result_Arg == "Boolean")
+            var result_Arg = Arg!.Semantic_Walk();
+            if (result_Arg == Scope.Declared.Boolean)
             {
                 return result_Arg;
             }

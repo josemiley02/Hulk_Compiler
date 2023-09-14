@@ -5,6 +5,7 @@ namespace HULK_COMPILER
         public string Name;
         public List<Token> Cant_Arg;
         public Expression Body;
+        public Scope? scope_funtion = new(Program.Global, new(), new());
 
         public Funtion(string name, List<Token> cant_Arg, Expression body)
         {
@@ -22,15 +23,16 @@ namespace HULK_COMPILER
         {
             foreach (var item in Cant_Arg)
             {
-                actual.Declared_Type.Add(item, null!);
+                actual.Declared_Type.Add(item, Scope.Declared.NoAsig);
             }
             Scope next = new Scope(actual, new(), new());
             Body.GetScope(next);
+            scope_funtion = actual;
         }
 
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            return "Funtion Declared";
+            return Scope.Declared.NoAsig;
         }
     }
     public class FunCallExpression : Expression
@@ -45,7 +47,18 @@ namespace HULK_COMPILER
 
         public override string Evaluate()
         {
-            throw new NotImplementedException();
+            Dictionary<Token, string> temp = funtion.scope_funtion!.Corpus_Values;
+            Dictionary<Token, string> ParamsFuntion = new();
+            int index = 0;
+            foreach (var item in expressions)
+            {
+                ParamsFuntion.Add(funtion.Cant_Arg[index], item.Evaluate());
+                index += 1;
+            }
+            funtion.scope_funtion.Corpus_Values = ParamsFuntion;
+            string final = funtion.Body.Evaluate();
+            funtion.scope_funtion.Corpus_Values = temp;
+            return final;
         }
 
         public override void GetScope(Scope actual)
@@ -57,9 +70,17 @@ namespace HULK_COMPILER
             return;
         }
 
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
-            throw new NotImplementedException();
+            if (funtion.Cant_Arg.Count == expressions.Count)
+            {
+                foreach (var item in expressions)
+                {
+                    item.Semantic_Walk();
+                }
+                return Scope.Declared.NoAsig;
+            }
+            throw new Semantic_Error("Incorrecto la cantidad de parametros");
         }
     }
     public class PrintExpression : Expression
@@ -74,7 +95,7 @@ namespace HULK_COMPILER
             return toprint.Evaluate();
         }
 
-        public override string Semantic_Walk()
+        public override Scope.Declared Semantic_Walk()
         {
             return toprint.Semantic_Walk();
         }
