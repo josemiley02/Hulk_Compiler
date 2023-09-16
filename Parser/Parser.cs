@@ -265,8 +265,11 @@ namespace HULK_COMPILER
         {
             if (codeline[ImHere].Types == Token.TokenTypes.Token_Log)
             {
-                (int, Expression) result_E = E(codeline, ImHere + 1, last);
-                return (result_E.Item1, new LogExpression(result_E.Item2));
+                if (codeline[ImHere + 1].Types == Token.TokenTypes.Open_Paren)
+                {
+                    (int, List<Expression>) result_K = K(codeline, ImHere + 2, new());
+                    return (result_K.Item1 + 1, new LogExpression(result_K.Item2));
+                }
             }
             if (codeline[ImHere].Types == Token.TokenTypes.Token_Sen)
             {

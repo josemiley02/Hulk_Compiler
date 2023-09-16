@@ -20,14 +20,14 @@ namespace HULK_COMPILER
         public enum TokenTypes
         {
             //With this enum, you can see, the diffrent tokens types defined for a Compiler
-            Token_Let, Token_Else, Token_Funtion, Token_If, Token_In, Token_Then, Token_While,
+            Token_Let, Token_Else, Token_Funtion, Token_If, Token_In, Token_Then, Token_While, Token_After,
             Token_Sum, Token_Dif, Token_Mult, Token_Div, Token_Equal, Token_Mod, Token_Exp,
             Token_Less, Token_More, Token_LessOrEqual, Token_MoreOrEqual, Token_DoubleEqual, Token_NoEqual,
             Token_Not, Token_And, Token_Or,
             WhiteSpace, Open_Paren, Close_Paren, Open_Block, Close_Block, Open_Key, Close_Key, EndLine,
             Identifiquer, Chain_Lietarls, Number_Literals, Print, Token_True, Token_False,
             Token_Log, Token_Sen, Token_Cos, Token_Tan, Token_Cot, Token_Sqrt, Token_PI,
-            Token_SpaceLine, Token_LINQ
+            Token_SpaceLine, Token_LINQ,
         }
         public TokenTypes Types;
         public string Value;
@@ -44,6 +44,7 @@ namespace HULK_COMPILER
             {"in", new Token(TokenTypes.Token_In,"in")},
             {"if", new Token(TokenTypes.Token_If,"if")},
             {"while", new Token(TokenTypes.Token_While,"while")},
+            {"after", new Token(TokenTypes.Token_After, "after")},
             {"else",new Token(TokenTypes.Token_Else,"else")},
             {"then",new Token(TokenTypes.Token_Then,"then")},
             {"function",new Token(TokenTypes.Token_Funtion,"function")},
