@@ -1,5 +1,5 @@
 L = M;
-M = let id = MH | if M else M | print(M) | funtion id (Q) => M | while(A) M after K | A
+M = let id = MH | if M else M | print(M) | funtion id (Q) => M | A
 H = in M | e
 Q = id | id , Q | e
 K = E | E , K | e

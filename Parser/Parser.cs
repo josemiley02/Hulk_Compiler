@@ -46,7 +46,7 @@ namespace HULK_COMPILER
                         last = asig;
                         return H(codeline, ImHere, last);
                     }
-                    throw new Syntax_Error($"Missing" + codeline[ImHere].Value + "in the expression");
+                    throw new Syntax_Error($"Missing" + codeline[ImHere + 2].Value + "in the expression");
                 }
             }
             if (codeline[ImHere].Types == Token.TokenTypes.Token_Funtion)
@@ -224,6 +224,12 @@ namespace HULK_COMPILER
                 Expression rest = new RestExpression(last, result_E.Item2);
                 return (result_E.Item1, rest);
             }
+            if (codeline[ImHere].Types == Token.TokenTypes.Token_Concat)
+            {
+                result_E = E(codeline, ImHere + 1, last);
+                Expression concat = new ConcatExpression(last, result_E.Item2);
+                return (result_E.Item1, concat);
+            }
             return (ImHere, last);
         }
         public static (int, Expression) F(List<Token> codeline, int ImHere, Expression last)
@@ -293,7 +299,7 @@ namespace HULK_COMPILER
             }
             if (codeline[ImHere].Types == Token.TokenTypes.Chain_Lietarls)
             {
-                return(ImHere + 1, new ChainExpression(codeline[ImHere].Value));
+                return (ImHere + 1, new ChainExpression(codeline[ImHere].Value));
             }
             if (codeline[ImHere].Types == Token.TokenTypes.Token_PI)
             {

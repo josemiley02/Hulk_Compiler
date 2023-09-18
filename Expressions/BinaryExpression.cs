@@ -274,4 +274,35 @@ namespace HULK_COMPILER
             throw new Semantic_Error("The Logarit not work with more that two arguments");
         }
     }
+    public class ConcatExpression : BinaryExpression
+    {
+        public ConcatExpression(Expression left, Expression right) : base(left, right)
+        {
+        }
+
+        public override string Evaluate()
+        {
+            return left.Evaluate() + right.Evaluate();
+        }
+
+        public override void GetScope(Scope actual)
+        {
+            left.GetScope(actual);
+            right.GetScope(actual);
+        }
+
+        public override Scope.Declared Semantic_Walk()
+        {
+            var a = left.Semantic_Walk();
+            var b = right.Semantic_Walk();
+            if (a == Scope.Declared.String)
+            {
+                return a;
+            }
+            else
+            {
+                throw new Semantic_Error("Invalid Operation");
+            }
+        }
+    }
 }

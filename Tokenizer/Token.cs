@@ -27,7 +27,7 @@ namespace HULK_COMPILER
             WhiteSpace, Open_Paren, Close_Paren, Open_Block, Close_Block, Open_Key, Close_Key, EndLine,
             Identifiquer, Chain_Lietarls, Number_Literals, Print, Token_True, Token_False,
             Token_Log, Token_Sen, Token_Cos, Token_Tan, Token_Cot, Token_Sqrt, Token_PI,
-            Token_SpaceLine, Token_LINQ,
+            Token_SpaceLine, Token_LINQ, Token_Concat
         }
         public TokenTypes Types;
         public string Value;
@@ -63,8 +63,8 @@ namespace HULK_COMPILER
             {"==", new Token(TokenTypes.Token_DoubleEqual,"==")},
             {"!=", new Token(TokenTypes.Token_NoEqual,"!=")},
             {"!", new Token(TokenTypes.Token_Not,"!")},
-            {"&&", new Token(TokenTypes.Token_And,"&&")},
-            {"||", new Token(TokenTypes.Token_Or,"||")},
+            {"&", new Token(TokenTypes.Token_And,"&")},
+            {"|", new Token(TokenTypes.Token_Or,"|")},
             {" ", new Token(TokenTypes.WhiteSpace," ")},
             {"(", new Token(TokenTypes.Open_Paren,"(")},
             {")", new Token(TokenTypes.Close_Paren,")")},
@@ -74,7 +74,7 @@ namespace HULK_COMPILER
             {"}",new Token(TokenTypes.Close_Key,"}")},
             {";",new Token(TokenTypes.EndLine,";")},
             {"log",new Token(TokenTypes.Token_Log,"log")},
-            {"sen", new Token(TokenTypes.Token_Sen,"sen")},
+            {"sin", new Token(TokenTypes.Token_Sen,"sin")},
             {"cos", new Token(TokenTypes.Token_Cos,"cos")},
             {"tan", new Token(TokenTypes.Token_Tan,"tan")},
             {"cot", new Token(TokenTypes.Token_Cot,"cot")},
@@ -83,7 +83,8 @@ namespace HULK_COMPILER
             {"true", new Token(TokenTypes.Token_True, "true")},
             {"false", new Token(TokenTypes.Token_False, "false")},
             {"PI", new Token(TokenTypes.Token_PI, "PI")},
-            {",", new Token(TokenTypes.Token_SpaceLine, ",")}
+            {",", new Token(TokenTypes.Token_SpaceLine, ",")},
+            {"@", new Token(TokenTypes.Token_Concat, "@")}
         };
     }
 }
