@@ -69,8 +69,12 @@ namespace HULK_COMPILER
 
         public override void GetScope(Scope actual)
         {
-            if (actual.Father == null) throw new Semantic_Error("NOT");
-            foreach (var item in actual.Father.Declared_Type.Keys)
+            if (actual.Father == null)
+            {
+                Parser.Error = "! SEMANTIC ERROR: The varaible " + ID.Value + " does not exist in this context";
+                Application.ThrowError(Parser.Error);
+            }
+            foreach (var item in actual.Father!.Declared_Type.Keys)
             {
                 if (item.Value == ID.Value)
                 {

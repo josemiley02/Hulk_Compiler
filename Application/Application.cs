@@ -17,8 +17,7 @@ namespace HULK_COMPILER
             if (key == ConsoleKey.Enter)
             {
                 var exp = Parser.L(Tokenizer.GetTokens(line), 0);
-                Scope scope = Program.Global;
-                exp.Item2.GetScope(scope);
+                exp.Item2.GetScope(Program.Global);
                 if (!Parser.Declarate_Funtion)
                 {
                     try
@@ -39,6 +38,7 @@ namespace HULK_COMPILER
                     }
                 }
                 Parser.Declarate_Funtion = false;
+                Program.Global = new(null!, new(), new());
                 SelectKey();
             }
             if (key == ConsoleKey.Escape)
@@ -46,6 +46,13 @@ namespace HULK_COMPILER
                 Console.ForegroundColor = ConsoleColor.White;
                 Environment.Exit(0);
             }
+        }
+        public static void ThrowError(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            System.Console.WriteLine(message);
+            Console.ForegroundColor = ConsoleColor.Green;
+            SelectKey();
         }
     }
 }

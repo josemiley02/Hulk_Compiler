@@ -22,7 +22,17 @@ namespace HULK_COMPILER
 
         public override string Evaluate()
         {
-            return (double.Parse(this.left.Evaluate()) + double.Parse(this.right.Evaluate())).ToString();
+            string result = "";
+            try
+            {
+                result = (double.Parse(this.left.Evaluate()) + double.Parse(this.right.Evaluate())).ToString();
+            }
+            catch (System.Exception)
+            {
+                System.Console.WriteLine("! SEMANTIC ERROR: Invalid Operation");
+                result = "";
+            }
+            return result;
         }
 
         public override void GetScope(Scope actual)
@@ -65,7 +75,17 @@ namespace HULK_COMPILER
 
         public override string Evaluate()
         {
-            return (double.Parse(this.left.Evaluate()) - double.Parse(this.right.Evaluate())).ToString();
+            string result = "";
+            try
+            {
+                result = (double.Parse(this.left.Evaluate()) - double.Parse(this.right.Evaluate())).ToString();
+            }
+            catch (System.Exception)
+            {
+                System.Console.WriteLine("! SEMANTIC ERROR: Invalid Operation");
+                result = "";
+            }
+            return result;
         }
         public override Scope.Declared Semantic_Walk()
         {
@@ -94,7 +114,17 @@ namespace HULK_COMPILER
 
         public override string Evaluate()
         {
-            return (double.Parse(this.left.Evaluate()) * double.Parse(this.right.Evaluate())).ToString();
+            string result = "";
+            try
+            {
+                result = (double.Parse(this.left.Evaluate()) * double.Parse(this.right.Evaluate())).ToString();
+            }
+            catch (System.Exception)
+            {
+                System.Console.WriteLine("! SEMANTIC ERROR: Invalid Operation");
+                result = "";
+            }
+            return result;
         }
         public override void GetScope(Scope actual)
         {
@@ -136,7 +166,17 @@ namespace HULK_COMPILER
 
         public override string Evaluate()
         {
-            return (double.Parse(this.left.Evaluate()) / double.Parse(this.right.Evaluate())).ToString();
+            string result = "";
+            try
+            {
+                result = (double.Parse(this.left.Evaluate()) / double.Parse(this.right.Evaluate())).ToString();
+            }
+            catch (System.Exception)
+            {
+                System.Console.WriteLine("! SEMANTIC ERROR: Invalid Operation");
+                result = "";
+            }
+            return result;
         }
         public override Scope.Declared Semantic_Walk()
         {
@@ -166,12 +206,21 @@ namespace HULK_COMPILER
         {
             left.GetScope(actual);
             right.GetScope(actual);
-            return;
         }
 
         public override string Evaluate()
         {
-            return Math.Pow(double.Parse(this.left.Evaluate()), double.Parse(this.right.Evaluate())).ToString();
+            string result = "";
+            try
+            {
+                result = Math.Pow(double.Parse(this.left.Evaluate()), double.Parse(this.right.Evaluate())).ToString();
+            }
+            catch (System.Exception)
+            {
+                System.Console.WriteLine("! SEMANTIC ERROR: Invalid Operation");
+                result = "";
+            }
+            return result;
         }
         public override Scope.Declared Semantic_Walk()
         {
@@ -206,7 +255,17 @@ namespace HULK_COMPILER
 
         public override string Evaluate()
         {
-            return (double.Parse(this.left.Evaluate()) % double.Parse(this.right.Evaluate())).ToString();
+            string result = "";
+            try
+            {
+                result = (double.Parse(this.left.Evaluate()) % double.Parse(this.right.Evaluate())).ToString();
+            }
+            catch (System.Exception)
+            {
+                System.Console.WriteLine("! SEMANTIC ERROR: Invalid Operation");
+                result = "";
+            }
+            return result;
         }
         public override Scope.Declared Semantic_Walk()
         {
@@ -235,14 +294,22 @@ namespace HULK_COMPILER
         }
         public override string Evaluate()
         {
-            if (Base_Arg.Count == 1)
+            string result = "";
+            try
             {
-                return Math.Log10(double.Parse(Base_Arg[0].Evaluate())).ToString();
+                if (Base_Arg.Count == 1)
+                {
+                    return result = Math.Log10(double.Parse(Base_Arg[0].Evaluate())).ToString();
+                }
+                double arg = double.Parse(Base_Arg[0].Evaluate());
+                double newbase = double.Parse(Base_Arg[1].Evaluate());
+                return result =  Math.Log(arg, newbase).ToString();
             }
-            
-            double arg = double.Parse(Base_Arg[0].Evaluate());
-            double newbase = double.Parse(Base_Arg[1].Evaluate());
-            return Math.Log(arg,newbase).ToString();
+            catch (System.Exception)
+            {
+                System.Console.WriteLine("! SEMANTIC ERROR: Invalid Arg for the Logaritm");
+            }
+            return result;
         }
 
         public override void GetScope(Scope actual)

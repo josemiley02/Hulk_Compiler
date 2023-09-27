@@ -63,8 +63,9 @@ namespace HULK_COMPILER
 
         public override void GetScope(Scope actual)
         {
-            let_part.GetScope(actual);
-            Scope next = new Scope(actual, new(), new());
+            Scope firstson = new Scope(actual, new(), new());
+            let_part.GetScope(firstson);
+            Scope next = new Scope(firstson, new(), new());
             after_in.GetScope(next);
         }
 

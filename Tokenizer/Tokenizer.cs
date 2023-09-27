@@ -102,10 +102,20 @@ namespace HULK_COMPILER
         private static (int, string) GetString(string codeline, int index)
         {
             string result = "";
-            while (codeline[index] != '\"')
+            try
             {
-                result += codeline[index];
-                index += 1;
+                while (codeline[index] != '\"')
+                {
+                    result += codeline[index];
+                    index += 1;
+                }
+            }
+            catch (System.IndexOutOfRangeException)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                System.Console.WriteLine("! LEXICAL ERROR: Missing \" in the string's final");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Application.SelectKey();
             }
             return (index, result);
         }
@@ -119,21 +129,27 @@ namespace HULK_COMPILER
             {
                 if ((codeline[i] == 'e' && IsE) || (codeline[i] == '.' && Is_Come))
                 {
-                    throw new Lexical_Error("Invalid Token");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    System.Console.WriteLine("! LEXICAL ERROR: " + result + codeline[i] + " is a Invalid Token");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Application.SelectKey();
                 }
-                if (codeline[i] == 'e') 
+                if (codeline[i] == 'e')
                 {
                     IsE = true;
                 }
-                if (codeline[i] == '.') 
+                if (codeline[i] == '.')
                 {
                     Is_Come = true;
                     result += ',';
                     continue;
                 }
-                if(char.IsLetter(codeline[i]))
+                if (char.IsLetter(codeline[i]))
                 {
-                    throw new Lexical_Error("Invalid Token");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    System.Console.WriteLine("! LEXICAL ERROR: " + result + codeline[i] + " is a Invalid Token");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Application.SelectKey();
                 }
                 if (!char.IsLetterOrDigit(codeline[i]))
                 {
