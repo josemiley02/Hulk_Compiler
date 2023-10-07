@@ -30,10 +30,9 @@ namespace HULK_COMPILER
             {
                 return result_Arg;
             }
-            else
-            {
-                throw new Semantic_Error("The funtion Log not work wiht a " + result_Arg);
-            }
+            Utils.Error = "! SEMANTIC ERROR: Invalid Argument for the Root";
+            Application.ThrowError(Utils.Error);
+            throw new();
         }
     }
     public class SenExpression : UnaryExpression
@@ -56,10 +55,9 @@ namespace HULK_COMPILER
             {
                 return result_Arg;
             }
-            else
-            {
-                throw new Semantic_Error("The funtion Log not work wiht a " + result_Arg);
-            }
+            Utils.Error = "! SEMANTIC ERROR: Invalid Argument for the Sin";
+            Application.ThrowError(Utils.Error);
+            throw new();
         }
     }
     public class CosExpression : UnaryExpression
@@ -82,10 +80,9 @@ namespace HULK_COMPILER
             {
                 return result_Arg;
             }
-            else
-            {
-                throw new Semantic_Error("The funtion Log not work wiht a " + result_Arg);
-            }
+            Utils.Error = "! SEMANTIC ERROR: Invalid Argument for the Cos";
+            Application.ThrowError(Utils.Error);
+            throw new();
         }
     }
     public class TanExpression : UnaryExpression
@@ -108,10 +105,9 @@ namespace HULK_COMPILER
             {
                 return result_Arg;
             }
-            else
-            {
-                throw new Semantic_Error("The funtion Log not work wiht a " + result_Arg);
-            }
+            Utils.Error = "! SEMANTIC ERROR: Invalid Argument for the Tan";
+            Application.ThrowError(Utils.Error);
+            throw new();
         }
     }
 }

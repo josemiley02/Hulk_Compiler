@@ -7,7 +7,7 @@ A = BZ | !BZ
 Z =  and A | or A | e
 B = EW
 W = < E | > E | <= E | >= E |==E | != E | = E |e
-E = FX
+E = FX | -E
 X = + E | - E | e
 F = TY
 Y = * F | / F | ^ F | e

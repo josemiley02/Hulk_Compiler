@@ -5,7 +5,7 @@ namespace HULK_COMPILER
         public string Name;
         public List<Token> Cant_Arg;
         public Expression Body;
-        public Scope? scope_funtion = new(Program.Global, new(), new());
+        public Scope? scope_funtion = new(Utils.Global, new(), new());
 
         public Funtion(string name, List<Token> cant_Arg, Expression body)
         {
@@ -80,7 +80,9 @@ namespace HULK_COMPILER
                 }
                 return Scope.Declared.NoAsig;
             }
-            throw new Semantic_Error("Incorrecto la cantidad de parametros");
+            Utils.Error = "! SEMANTIC ERROR: Invalid arguments count";
+            Application.ThrowError(Utils.Error);
+            throw new();
         }
     }
     public class PrintExpression : Expression

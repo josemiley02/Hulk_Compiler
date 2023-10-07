@@ -34,6 +34,11 @@ namespace HULK_COMPILER
                 //The "GetString" method is invoked
                 if (codeline[i] == '\"')
                 {
+                    if (temp != "")
+                    {
+                        tokens.Add(GetToken(temp));
+                        temp = "";
+                    }
                     (int, string) string_result = GetString(codeline, i + 1);
                     temp = string_result.Item2;
                     tokens.Add(new Token(Token.TokenTypes.Chain_Lietarls, temp));
@@ -43,10 +48,27 @@ namespace HULK_COMPILER
                 }
                 //This conditional is used to indicate whether one is in the presence of a numerical literal. 
                 //The GetNumber method is invoked if necessary
-                if (char.IsDigit(codeline[i]) && temp == "")
+                if (codeline[i] == '-')
+                {
+                    if (temp != "")
+                    {
+                        tokens.Add(GetToken(temp));
+                        temp = "";
+                    }
+                    if (tokens.Count != 0 && (tokens[tokens.Count - 1].Types == Token.TokenTypes.Number_Literals ||
+                       tokens[tokens.Count - 1].Types == Token.TokenTypes.Close_Paren ||
+                       tokens[tokens.Count - 1].Types == Token.TokenTypes.Identifiquer))
+                    {
+                        tokens.Add(new Token(Token.TokenTypes.Token_Dif, "-"));
+                        continue;
+                    }
+                    temp += codeline[i];
+                    continue;
+                }
+                if (char.IsDigit(codeline[i]) && (temp == "" || temp == "-"))
                 {
                     (string, int) int_result = GetNumber(codeline, i);
-                    temp = int_result.Item1;
+                    temp += int_result.Item1;
                     tokens.Add(new Token(Token.TokenTypes.Number_Literals, temp));
                     i += int_result.Item2 - 1;
                     temp = "";
@@ -112,10 +134,8 @@ namespace HULK_COMPILER
             }
             catch (System.IndexOutOfRangeException)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                System.Console.WriteLine("! LEXICAL ERROR: Missing \" in the string's final");
-                Console.ForegroundColor = ConsoleColor.Green;
-                Application.SelectKey();
+                Utils.Error = "! LEXICAL ERROR: Missing \" in the string's final";
+                Application.ThrowError(Utils.Error);
             }
             return (index, result);
         }
@@ -129,10 +149,8 @@ namespace HULK_COMPILER
             {
                 if ((codeline[i] == 'e' && IsE) || (codeline[i] == '.' && Is_Come))
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    System.Console.WriteLine("! LEXICAL ERROR: " + result + codeline[i] + " is a Invalid Token");
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Application.SelectKey();
+                    Utils.Error = "! LEXICAL ERROR: " + result + codeline[i] + " is a Invalid Token";
+                    Application.ThrowError(Utils.Error);
                 }
                 if (codeline[i] == 'e')
                 {
@@ -146,10 +164,8 @@ namespace HULK_COMPILER
                 }
                 if (char.IsLetter(codeline[i]))
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    System.Console.WriteLine("! LEXICAL ERROR: " + result + codeline[i] + " is a Invalid Token");
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Application.SelectKey();
+                    Utils.Error = "! LEXICAL ERROR: " + result + codeline[i] + " is a Invalid Token";
+                    Application.ThrowError(Utils.Error);
                 }
                 if (!char.IsLetterOrDigit(codeline[i]))
                 {

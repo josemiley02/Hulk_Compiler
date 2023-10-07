@@ -16,9 +16,7 @@ namespace HULK_COMPILER
     //+
     public class SumExpression : BinaryExpression
     {
-        public SumExpression(Expression left, Expression right) : base(left, right)
-        {
-        }
+        public SumExpression(Expression left, Expression right) : base(left, right){}
 
         public override string Evaluate()
         {
@@ -29,8 +27,8 @@ namespace HULK_COMPILER
             }
             catch (System.Exception)
             {
-                System.Console.WriteLine("! SEMANTIC ERROR: Invalid Operation");
-                result = "";
+                Utils.Error = "! SEMANTIC ERROR: Invalid Operation";
+                Application.ThrowError(Utils.Error);
             }
             return result;
         }
@@ -39,7 +37,6 @@ namespace HULK_COMPILER
         {
             left.GetScope(actual);
             right.GetScope(actual);
-            return;
         }
 
         public override Scope.Declared Semantic_Walk()
@@ -56,21 +53,20 @@ namespace HULK_COMPILER
             }
             else
             {
-                throw new Semantic_Error("You can't opearte " + a + " with " + b);
+                Utils.Error = "! SEMANTIC ERROR: You can't Operate " + a + " with " + b;
+                Application.ThrowError(Utils.Error);
             }
+            throw new();
         }
     }
     //-
     public class RestExpression : BinaryExpression
     {
-        public RestExpression(Expression left, Expression right) : base(left, right)
-        {
-        }
+        public RestExpression(Expression left, Expression right) : base(left, right){}
         public override void GetScope(Scope actual)
         {
             left.GetScope(actual);
             right.GetScope(actual);
-            return;
         }
 
         public override string Evaluate()
@@ -82,8 +78,8 @@ namespace HULK_COMPILER
             }
             catch (System.Exception)
             {
-                System.Console.WriteLine("! SEMANTIC ERROR: Invalid Operation");
-                result = "";
+                Utils.Error = "! SEMANTIC ERROR: Invalid Operation";
+                Application.ThrowError(Utils.Error);
             }
             return result;
         }
@@ -101,16 +97,16 @@ namespace HULK_COMPILER
             }
             else
             {
-                throw new Semantic_Error("You can't opearte " + a + " with " + b);
+                Utils.Error = "! SEMANTIC ERROR: You can't Operate " + a + " with " + b;
+                Application.ThrowError(Utils.Error);
             }
+            throw new();
         }
     }
     //*
     public class MultExpression : BinaryExpression
     {
-        public MultExpression(Expression left, Expression right) : base(left, right)
-        {
-        }
+        public MultExpression(Expression left, Expression right) : base(left, right){}
 
         public override string Evaluate()
         {
@@ -121,8 +117,8 @@ namespace HULK_COMPILER
             }
             catch (System.Exception)
             {
-                System.Console.WriteLine("! SEMANTIC ERROR: Invalid Operation");
-                result = "";
+                Utils.Error = "! SEMANTIC ERROR: Invalid Operation";
+                Application.ThrowError(Utils.Error);
             }
             return result;
         }
@@ -130,7 +126,6 @@ namespace HULK_COMPILER
         {
             left.GetScope(actual);
             right.GetScope(actual);
-            return;
         }
 
         public override Scope.Declared Semantic_Walk()
@@ -147,23 +142,21 @@ namespace HULK_COMPILER
             }
             else
             {
-                throw new Semantic_Error("You can't opearte " + a + " with " + b);
+                Utils.Error = "! SEMANTIC ERROR: You can't Operate " + a + " with " + b;
+                Application.ThrowError(Utils.Error);
             }
+            throw new();
         }
     }
     // /
     public class DivExpression : BinaryExpression
     {
-        public DivExpression(Expression left, Expression right) : base(left, right)
-        {
-        }
+        public DivExpression(Expression left, Expression right) : base(left, right){}
         public override void GetScope(Scope actual)
         {
             left.GetScope(actual);
             right.GetScope(actual);
-            return;
         }
-
         public override string Evaluate()
         {
             string result = "";
@@ -173,8 +166,8 @@ namespace HULK_COMPILER
             }
             catch (System.Exception)
             {
-                System.Console.WriteLine("! SEMANTIC ERROR: Invalid Operation");
-                result = "";
+                Utils.Error = "! SEMANTIC ERROR: Invalid Operation";
+                Application.ThrowError(Utils.Error);
             }
             return result;
         }
@@ -192,22 +185,21 @@ namespace HULK_COMPILER
             }
             else
             {
-                throw new Semantic_Error("You can't opearte " + a + " with " + b);
+                Utils.Error = "! SEMANTIC ERROR: You can't Operate " + a + " with " + b;
+                Application.ThrowError(Utils.Error);
             }
+            throw new();
         }
     }
     //^
     public class ExpExpression : BinaryExpression
     {
-        public ExpExpression(Expression left, Expression right) : base(left, right)
-        {
-        }
+        public ExpExpression(Expression left, Expression right) : base(left, right){}
         public override void GetScope(Scope actual)
         {
             left.GetScope(actual);
             right.GetScope(actual);
         }
-
         public override string Evaluate()
         {
             string result = "";
@@ -217,8 +209,8 @@ namespace HULK_COMPILER
             }
             catch (System.Exception)
             {
-                System.Console.WriteLine("! SEMANTIC ERROR: Invalid Operation");
-                result = "";
+                Utils.Error = "! SEMANTIC ERROR: Invalid Operation";
+                Application.ThrowError(Utils.Error);
             }
             return result;
         }
@@ -236,23 +228,21 @@ namespace HULK_COMPILER
             }
             else
             {
-                throw new Semantic_Error("You can't opearte " + a + " with " + b);
+                Utils.Error = "! SEMANTIC ERROR: You can't Operate " + a + " with " + b;
+                Application.ThrowError(Utils.Error);
             }
+            throw new();
         }
     }
     //%
     public class ModExpression : BinaryExpression
     {
-        public ModExpression(Expression left, Expression right) : base(left, right)
-        {
-        }
+        public ModExpression(Expression left, Expression right) : base(left, right){}
         public override void GetScope(Scope actual)
         {
             left.GetScope(actual);
             right.GetScope(actual);
-            return;
         }
-
         public override string Evaluate()
         {
             string result = "";
@@ -262,8 +252,8 @@ namespace HULK_COMPILER
             }
             catch (System.Exception)
             {
-                System.Console.WriteLine("! SEMANTIC ERROR: Invalid Operation");
-                result = "";
+                Utils.Error = "! SEMANTIC ERROR: Invalid Operation";
+                Application.ThrowError(Utils.Error);
             }
             return result;
         }
@@ -281,8 +271,10 @@ namespace HULK_COMPILER
             }
             else
             {
-                throw new Semantic_Error("You can't opearte " + a + " with " + b);
+                Utils.Error = "! SEMANTIC ERROR: You can't Operate " + a + " with " + b;
+                Application.ThrowError(Utils.Error);
             }
+            throw new();
         }
     }
     public class LogExpression : Expression
@@ -303,15 +295,15 @@ namespace HULK_COMPILER
                 }
                 double arg = double.Parse(Base_Arg[0].Evaluate());
                 double newbase = double.Parse(Base_Arg[1].Evaluate());
-                return result =  Math.Log(arg, newbase).ToString();
+                return result = Math.Log(arg, newbase).ToString();
             }
             catch (System.Exception)
             {
-                System.Console.WriteLine("! SEMANTIC ERROR: Invalid Arg for the Logaritm");
+                Utils.Error = "! SEMANTIC ERROR: Invalid Argument for Logarithm";
+                Application.ThrowError(Utils.Error);
             }
             return result;
         }
-
         public override void GetScope(Scope actual)
         {
             if (Base_Arg.Count != 0)
@@ -322,9 +314,9 @@ namespace HULK_COMPILER
                 }
                 return;
             }
-            throw new Semantic_Error("The Logarit needs one Arg");
+            Utils.Error = "! SEMANTIC ERROR: Invalid Argument for Logarithm";
+            Application.ThrowError(Utils.Error);
         }
-
         public override Scope.Declared Semantic_Walk()
         {
             if (Base_Arg.Count <= 2)
@@ -338,14 +330,14 @@ namespace HULK_COMPILER
                 }
                 return Scope.Declared.Double;
             }
-            throw new Semantic_Error("The Logarit not work with more that two arguments");
+            Utils.Error = "! SEMANTIC ERROR: Invalid Argument for Logarithm";
+            Application.ThrowError(Utils.Error);
+            throw new();
         }
     }
     public class ConcatExpression : BinaryExpression
     {
-        public ConcatExpression(Expression left, Expression right) : base(left, right)
-        {
-        }
+        public ConcatExpression(Expression left, Expression right) : base(left, right){}
 
         public override string Evaluate()
         {
@@ -368,8 +360,10 @@ namespace HULK_COMPILER
             }
             else
             {
-                throw new Semantic_Error("Invalid Operation");
+                Utils.Error = "! SEMANTIC ERROR: Invalid Operation";
+                Application.ThrowError(Utils.Error);
             }
+            throw new();
         }
     }
 }

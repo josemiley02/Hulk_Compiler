@@ -12,10 +12,7 @@ namespace HULK_COMPILER
             return this.Value.ToString();
         }
 
-        public override void GetScope(Scope actual)
-        {
-            return;
-        }
+        public override void GetScope(Scope actual){}
 
         public override Scope.Declared Semantic_Walk()
         {
@@ -34,10 +31,7 @@ namespace HULK_COMPILER
             return this.Value.ToString();
         }
 
-        public override void GetScope(Scope actual)
-        {
-            return;
-        }
+        public override void GetScope(Scope actual){}
 
         public override Scope.Declared Semantic_Walk()
         {
@@ -71,8 +65,8 @@ namespace HULK_COMPILER
         {
             if (actual.Father == null)
             {
-                Parser.Error = "! SEMANTIC ERROR: The varaible " + ID.Value + " does not exist in this context";
-                Application.ThrowError(Parser.Error);
+                Utils.Error = "! SEMANTIC ERROR: The varaible " + ID.Value + " does not exist in this context";
+                Application.ThrowError(Utils.Error);
             }
             foreach (var item in actual.Father!.Declared_Type.Keys)
             {
@@ -94,6 +88,7 @@ namespace HULK_COMPILER
                     return Here.Declared_Type[item];
                 }
             }
+            Utils.Error = "! SEMANTIC ERROR: Tha variable " + ID.Value + ", is not declared in this scope";
             throw new Exception();
         }
     }
@@ -109,10 +104,7 @@ namespace HULK_COMPILER
             return value;
         }
 
-        public override void GetScope(Scope actual)
-        {
-            return;
-        }
+        public override void GetScope(Scope actual){}
 
         public override Scope.Declared Semantic_Walk()
         {

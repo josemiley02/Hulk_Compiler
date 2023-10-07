@@ -17,14 +17,14 @@ namespace HULK_COMPILER
             if (key == ConsoleKey.Enter)
             {
                 var exp = Parser.L(Tokenizer.GetTokens(line), 0);
-                exp.Item2.GetScope(Program.Global);
-                if (!Parser.Declarate_Funtion)
+                exp.Item2.GetScope(Utils.Global);
+                if (!Utils.Declarate_Funtion)
                 {
                     try
                     {
                         exp.Item2.Semantic_Walk();
                     }
-                    catch (HULK_COMPILER.Semantic_Error)
+                    catch (System.Exception)
                     {
                         throw;
                     }
@@ -37,8 +37,8 @@ namespace HULK_COMPILER
                         throw;
                     }
                 }
-                Parser.Declarate_Funtion = false;
-                Program.Global = new(null!, new(), new());
+                Utils.Declarate_Funtion = false;
+                Utils.Global = new(null!, new(), new());
                 SelectKey();
             }
             if (key == ConsoleKey.Escape)

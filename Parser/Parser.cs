@@ -3,8 +3,6 @@ namespace HULK_COMPILER
     public static class Parser
     {
         public static bool IsFuntion;
-        public static bool Declarate_Funtion;
-        public static string Error = "";
         public static (int, Expression) L(List<Token> codeline, int ImHere)
         {
             try
@@ -17,9 +15,9 @@ namespace HULK_COMPILER
             }
             catch (System.Exception)
             {
-                Error = "! LEXYCAL ERROR: Where is ; ???";
+               Utils.Error = "! LEXYCAL ERROR: Where is ; ???";
             }
-            Application.ThrowError(Error);
+            Application.ThrowError(Utils.Error);
             return (0, null)!;
         }
         public static (int, Expression) M(List<Token> codeline, int ImHere, Expression last = null!)
@@ -28,7 +26,7 @@ namespace HULK_COMPILER
             {
                 (int, Expression) result_M = M(codeline, ImHere + 1, last);
                 Expression print = new PrintExpression(result_M.Item2);
-                if (!Declarate_Funtion) IsFuntion = true;
+                if (!Utils.Declarate_Funtion) IsFuntion = true;
                 return (result_M.Item1, print);
             }
             if (codeline[ImHere].Types == Token.TokenTypes.Token_If)
@@ -41,8 +39,8 @@ namespace HULK_COMPILER
                     Expression condition = new Conditionals(if_expression.Item2, then_expression.Item2, else_expression.Item2);
                     return (else_expression.Item1, condition);
                 }
-                Error = "! LEXYCAL ERROR: The Conditional needs a \"else\" part";
-                Application.ThrowError(Error);
+                Utils.Error = "! SYNTAX ERROR: The Conditional needs a \"else\" part";
+                Application.ThrowError(Utils.Error);
             }
             if (codeline[ImHere].Types == Token.TokenTypes.Token_Let)
             {
@@ -57,13 +55,13 @@ namespace HULK_COMPILER
                         last = asig;
                         return H(codeline, ImHere, last);
                     }
-                    Error = "! LEXYCAL ERROR: Invalid Token \"" + codeline[ImHere + 2].Value + "\"";
-                    Application.ThrowError(Error);
+                    Utils.Error = "! SYNTAX ERROR: Invalid Token \"" + codeline[ImHere + 2].Value + "\"";
+                    Application.ThrowError(Utils.Error);
                 }
-                Error = "! LEXYCAL ERROR: Invalid Token \"" + codeline[ImHere + 1].Value + "\"";
-                Application.ThrowError(Error);
+                Utils.Error = "! SYNTAX ERROR: Invalid Token \"" + codeline[ImHere + 1].Value + "\"";
+                Application.ThrowError(Utils.Error);
             }
-            if (codeline[ImHere].Types == Token.TokenTypes.Token_Funtion)
+            if (codeline[ImHere].Types == Token.TokenTypes.Token_Funtion && ImHere == 0)
             {
                 if (codeline[ImHere + 1].Types == Token.TokenTypes.Identifiquer)
                 {
@@ -74,21 +72,21 @@ namespace HULK_COMPILER
                         ImHere = result_Q.Item1;
                         if (codeline[ImHere].Types == Token.TokenTypes.Token_LINQ)
                         {
-                            Declarate_Funtion = true;
+                            Utils.Declarate_Funtion = true;
                             Funtion func = new Funtion(token.Value, result_Q.Item2, null!);
-                            Program.Funtions.Add(func);
+                            Utils.Funtions.Add(func);
                             (int, Expression) result_M = M(codeline, ImHere + 1);
                             func.Body = result_M.Item2;
                             return (result_M.Item1, func);
                         }
-                        Error = "! LEXYCAL ERROR: It was expected \"=>\"";
-                        Application.ThrowError(Error);
+                        Utils.Error = "! SYNTAX ERROR: It was expected \"=>\"";
+                        Application.ThrowError(Utils.Error);
                     }
-                    Error = "! LEXYCAL ERROR: Missing \"(\" in the Expression";
-                    Application.ThrowError(Error);
+                    Utils.Error = "! SYNTAX ERROR: Missing \"(\" in the Expression";
+                    Application.ThrowError(Utils.Error);
                 }
-                Error = "! LEXYCAL ERROR: Invalid Token \"" + codeline[ImHere + 1].Value + "\"";
-                Application.ThrowError(Error);
+                Utils.Error = "! SYNTAX ERROR: Invalid Token \"" + codeline[ImHere + 1].Value + "\"";
+                Application.ThrowError(Utils.Error);
             }
             return A(codeline, ImHere, last);
         }
@@ -100,6 +98,7 @@ namespace HULK_COMPILER
                 Expression let_in = new LetInExpression(last, result_M.Item2);
                 return (result_M.Item1, let_in);
             }
+            Utils.Error = "! SYUNTAX ERROR: Invalid Token \"" + codeline[ImHere].Value + "\" in the Expression";
             return (ImHere, last);
         }
         public static (int, List<Token>) Q(List<Token> codeline, int ImHere, List<Token> cant)
@@ -117,35 +116,29 @@ namespace HULK_COMPILER
             {
                 return (ImHere + 1, cant);
             }
-            Error = "!LEXYCAL ERROR: Invalid Token " + codeline[ImHere].Value;
-            Application.ThrowError(Error);
+            Utils.Error = "!SYNTAX ERROR: Invalid Token " + codeline[ImHere].Value;
+            Application.ThrowError(Utils.Error);
             return (0, null)!;
         }
         public static (int, List<Expression>) K(List<Token> codeline, int ImHere, List<Expression> expressions)
         {
-            List<Token> sub_tokens = new();
-            (int, Expression) result_L;
             for (int i = ImHere; i < codeline.Count; i++)
             {
-                if (codeline[i].Types == Token.TokenTypes.Token_SpaceLine)
+                var exp = M(codeline, i);
+                expressions.Add(exp.Item2);
+                if (codeline[exp.Item1].Types == Token.TokenTypes.Token_SpaceLine)
                 {
-                    sub_tokens.Add(new Token(Token.TokenTypes.EndLine, ";"));
-                    result_L = L(sub_tokens, 0);
-                    expressions.Add(result_L.Item2);
-                    sub_tokens = new();
-                    i += 1;
+                    i = exp.Item1;
+                    continue;
                 }
-                if (codeline[i].Types == Token.TokenTypes.Close_Paren && sub_tokens.Count != 0)
+                if (codeline[exp.Item1].Types == Token.TokenTypes.Close_Paren)
                 {
-                    sub_tokens.Add(new Token(Token.TokenTypes.EndLine, ";"));
-                    result_L = L(sub_tokens, 0);
-                    expressions.Add(result_L.Item2);
-                    return (i, expressions);
+                    return (exp.Item1, expressions);
                 }
-                sub_tokens.Add(codeline[i]);
+                break;
             }
-            Error = "! LEXYCAL ERROR: Invalid Expression";
-            Application.ThrowError(Error);
+            Utils.Error = "! SYNTAX ERROR: Invalid Expression";
+            Application.ThrowError(Utils.Error);
             return (0, null)!;
         }
         public static (int, Expression) A(List<Token> codeline, int ImHere, Expression last = null!)
@@ -298,8 +291,8 @@ namespace HULK_COMPILER
                     (int, List<Expression>) result_K = K(codeline, ImHere + 2, new());
                     return (result_K.Item1 + 1, new LogExpression(result_K.Item2));
                 }
-                Error = "! LEXYCAL ERROR: Missing \"(\" in the expression";
-                Application.ThrowError(Error);
+                Utils.Error = "! SYNTAX ERROR: Missing \"(\" in the expression";
+                Application.ThrowError(Utils.Error);
             }
             if (codeline[ImHere].Types == Token.TokenTypes.Token_Sen)
             {
@@ -343,7 +336,7 @@ namespace HULK_COMPILER
             }
             if (codeline[ImHere].Types == Token.TokenTypes.Identifiquer)
             {
-                foreach (var item in Program.Funtions)
+                foreach (var item in Utils.Funtions)
                 {
                     if (item.Name == codeline[ImHere].Value)
                     {
@@ -355,7 +348,7 @@ namespace HULK_COMPILER
 
                             Expression funtion = new FunCallExpression(item, result_K.Item2);
 
-                            if (!Declarate_Funtion) IsFuntion = true;
+                            if (!Utils.Declarate_Funtion) IsFuntion = true;
 
                             return (result_K.Item1 + 1, funtion);
                         }
@@ -377,14 +370,14 @@ namespace HULK_COMPILER
                     {
                         return (result_M.Item1, result_M.Item2);
                     }
-                    Error = "! LEXYCAL ERROR: Missing closing parenthesis after " + codeline[result_M.Item1 - 1].Value;
-                    Application.ThrowError(Error);
+                    Utils.Error = "! SYNTAX ERROR: Missing closing parenthesis after " + codeline[result_M.Item1 - 1].Value;
+                    Application.ThrowError(Utils.Error);
                 }
-                Error = "! LEXYCAL ERROR: Missing opening parenthesis after " + codeline[result_M.Item1 - 1].Value;
-                Application.ThrowError(Error);
+                Utils.Error = "! SYNTAX ERROR: Missing opening parenthesis after " + codeline[result_M.Item1 - 1].Value;
+                Application.ThrowError(Utils.Error);
             }
-            Error = $"! LEXYCAL ERROR: Invalid token " + codeline[ImHere].Value + " in the expression";
-            Application.ThrowError(Error);
+            Utils.Error = $"! SYNTAX ERROR: Invalid token \"" + codeline[ImHere].Value + "\" in the expression";
+            Application.ThrowError(Utils.Error);
             return (0, null)!;
         }
     }

@@ -32,18 +32,13 @@ namespace HULK_COMPILER
         {
             if (If_Part.Semantic_Walk() == Scope.Declared.Boolean)
             {
-                try
-                {
-                    var result_then = Then_Part.Semantic_Walk();
-                    var result_else = Else_Part.Semantic_Walk();
-                    return Scope.Declared.NoAsig;
-                }
-                catch (HULK_COMPILER.Semantic_Error)
-                {
-                    throw;
-                }
+                var result_then = Then_Part.Semantic_Walk();
+                var result_else = Else_Part.Semantic_Walk();
+                return Scope.Declared.NoAsig;
             }
-            throw new Semantic_Error("This is not Boolean Expression");
+            Utils.Error = "! SEMANTIC ERROR: This is not Boolean Expression, in the \'if\'";
+            Application.ThrowError(Utils.Error);
+            throw new();
         }
     }
 }
