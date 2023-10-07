@@ -15,7 +15,7 @@ namespace HULK_COMPILER
             }
             catch (System.Exception)
             {
-               Utils.Error = "! LEXYCAL ERROR: Where is ; ???";
+                Utils.Error = "! LEXYCAL ERROR: Where is ; ???";
             }
             Application.ThrowError(Utils.Error);
             return (0, null)!;
@@ -92,14 +92,20 @@ namespace HULK_COMPILER
         }
         public static (int, Expression) H(List<Token> codeline, int ImHere, Expression last)
         {
-            if (codeline[ImHere].Types == Token.TokenTypes.Token_In)
+            if (codeline[ImHere].Types == Token.TokenTypes.Token_In){}
+            
+            else if (codeline[ImHere].Types == Token.TokenTypes.Token_SpaceLine)
             {
-                (int, Expression) result_M = M(codeline, ImHere + 1, last);
-                Expression let_in = new LetInExpression(last, result_M.Item2);
-                return (result_M.Item1, let_in);
+                codeline.Insert(ImHere + 1, new Token(Token.TokenTypes.Token_Let, "let"));
             }
-            Utils.Error = "! SYUNTAX ERROR: Invalid Token \"" + codeline[ImHere].Value + "\" in the Expression";
-            return (ImHere, last);
+            else
+            {
+                Utils.Error = "! SYUNTAX ERROR: Invalid Token \"" + codeline[ImHere].Value + "\" in the Expression";
+                return (ImHere, last);
+            }
+            (int, Expression) result_M = M(codeline, ImHere + 1, last);
+            Expression let_in = new LetInExpression(last, result_M.Item2);
+            return (result_M.Item1, let_in);
         }
         public static (int, List<Token>) Q(List<Token> codeline, int ImHere, List<Token> cant)
         {
