@@ -1,7 +1,9 @@
 namespace HULK_COMPILER
 {
+    //BOOLEAN OPERATORS
     public class MoreExpression : BinaryExpression
     {
+
         public MoreExpression(Expression left, Expression right) : base(left, right)
         {
         }

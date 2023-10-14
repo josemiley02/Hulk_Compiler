@@ -1,5 +1,6 @@
 namespace HULK_COMPILER
 {
+    //Expresion for the let part in a let-in expression
     public class AsigExpression : Expression
     {
         Token target;
@@ -45,6 +46,7 @@ namespace HULK_COMPILER
             where = actual;
         }
     }
+    //Let-In Expression with two parts, the let part and after-in part
     public class LetInExpression : Expression
     {
         Expression let_part;

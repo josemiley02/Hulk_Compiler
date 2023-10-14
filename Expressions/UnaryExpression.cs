@@ -10,6 +10,7 @@ namespace HULK_COMPILER
             this.Arg = arg;
         }
     }
+    //SQRT
     public class RootExpression : UnaryExpression
     {
         public RootExpression(Expression arg) : base(arg)
@@ -35,6 +36,7 @@ namespace HULK_COMPILER
             throw new();
         }
     }
+    //SIN
     public class SenExpression : UnaryExpression
     {
         public SenExpression(Expression arg) : base(arg)
@@ -60,6 +62,7 @@ namespace HULK_COMPILER
             throw new();
         }
     }
+    //COS
     public class CosExpression : UnaryExpression
     {
         public CosExpression(Expression arg) : base(arg)
@@ -85,6 +88,7 @@ namespace HULK_COMPILER
             throw new();
         }
     }
+    //TAN
     public class TanExpression : UnaryExpression
     {
         public TanExpression(Expression arg) : base(arg)

@@ -13,7 +13,7 @@ namespace HULK_COMPILER
             this.right = right;
         }
     }
-    //+
+    //Addition
     public class SumExpression : BinaryExpression
     {
         public SumExpression(Expression left, Expression right) : base(left, right){}
@@ -59,7 +59,7 @@ namespace HULK_COMPILER
             throw new();
         }
     }
-    //-
+    //Substraction
     public class RestExpression : BinaryExpression
     {
         public RestExpression(Expression left, Expression right) : base(left, right){}
@@ -103,7 +103,7 @@ namespace HULK_COMPILER
             throw new();
         }
     }
-    //*
+    //Multiplication
     public class MultExpression : BinaryExpression
     {
         public MultExpression(Expression left, Expression right) : base(left, right){}
@@ -148,7 +148,7 @@ namespace HULK_COMPILER
             throw new();
         }
     }
-    // /
+    // Division
     public class DivExpression : BinaryExpression
     {
         public DivExpression(Expression left, Expression right) : base(left, right){}
@@ -191,7 +191,7 @@ namespace HULK_COMPILER
             throw new();
         }
     }
-    //^
+    // Pow
     public class ExpExpression : BinaryExpression
     {
         public ExpExpression(Expression left, Expression right) : base(left, right){}
@@ -234,7 +234,7 @@ namespace HULK_COMPILER
             throw new();
         }
     }
-    //%
+    // Mod
     public class ModExpression : BinaryExpression
     {
         public ModExpression(Expression left, Expression right) : base(left, right){}
@@ -277,6 +277,7 @@ namespace HULK_COMPILER
             throw new();
         }
     }
+    //Logarithm
     public class LogExpression : Expression
     {
         List<Expression> Base_Arg;
@@ -335,6 +336,7 @@ namespace HULK_COMPILER
             throw new();
         }
     }
+    //Concat
     public class ConcatExpression : BinaryExpression
     {
         public ConcatExpression(Expression left, Expression right) : base(left, right){}

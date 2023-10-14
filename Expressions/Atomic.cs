@@ -1,5 +1,6 @@
 namespace HULK_COMPILER
 {
+    //ATOMICS EXPRESSIONS
     public class NumberExpression : Expression
     {
         public double Value;

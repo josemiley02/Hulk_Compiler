@@ -1,5 +1,7 @@
 namespace HULK_COMPILER
 {
+    //This class parses the token list and constructs the AST (which is an expression composed of expressions)
+    //Consult file "Test.txt where the grammar is written along with the produtions"
     public static class Parser
     {
         public static bool IsFuntion;

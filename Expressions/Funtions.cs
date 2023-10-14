@@ -2,10 +2,10 @@ namespace HULK_COMPILER
 {
     public class Funtion : Expression
     {
-        public string Name;
-        public List<Token> Cant_Arg;
-        public Expression Body;
-        public Scope? scope_funtion = new(Utils.Global, new(), new());
+        public string Name; //Function's name
+        public List<Token> Cant_Arg; //Params
+        public Expression Body; //Body
+        public Scope? scope_funtion = new(Utils.Global, new(), new()); //Scope
 
         public Funtion(string name, List<Token> cant_Arg, Expression body)
         {
@@ -38,7 +38,7 @@ namespace HULK_COMPILER
     public class FunCallExpression : Expression
     {
         Funtion funtion;
-        List<Expression> expressions;
+        List<Expression> expressions; //Args for the function
         public FunCallExpression(Funtion funtion, List<Expression> expressions)
         {
             this.expressions = expressions;
