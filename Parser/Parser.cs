@@ -17,12 +17,13 @@ namespace HULK_COMPILER
             }
             catch (System.Exception)
             {
-                Utils.Error = "! LEXYCAL ERROR: Where is ; ???";
+                var x = "! LEXYCAL ERROR: Where is ; ???";
+                Application.ThrowError(x);
             }
-            Application.ThrowError(Utils.Error);
+            Application.ThrowError("! "); //Escribir Parsin Error...
             return (0, null)!;
         }
-        public static (int, Expression) M(List<Token> codeline, int ImHere, Expression last = null!)
+        private static (int, Expression) M(List<Token> codeline, int ImHere, Expression last = null!)
         {
             if (codeline[ImHere].Types == Token.TokenTypes.Print)
             {
@@ -92,7 +93,7 @@ namespace HULK_COMPILER
             }
             return A(codeline, ImHere, last);
         }
-        public static (int, Expression) H(List<Token> codeline, int ImHere, Expression last)
+        private static (int, Expression) H(List<Token> codeline, int ImHere, Expression last)
         {
             if (codeline[ImHere].Types == Token.TokenTypes.Token_In){}
             
@@ -109,7 +110,7 @@ namespace HULK_COMPILER
             Expression let_in = new LetInExpression(last, result_M.Item2);
             return (result_M.Item1, let_in);
         }
-        public static (int, List<Token>) Q(List<Token> codeline, int ImHere, List<Token> cant)
+        private static (int, List<Token>) Q(List<Token> codeline, int ImHere, List<Token> cant)
         {
             if (codeline[ImHere].Types == Token.TokenTypes.Identifiquer)
             {
@@ -128,7 +129,7 @@ namespace HULK_COMPILER
             Application.ThrowError(Utils.Error);
             return (0, null)!;
         }
-        public static (int, List<Expression>) K(List<Token> codeline, int ImHere, List<Expression> expressions)
+        private static (int, List<Expression>) K(List<Token> codeline, int ImHere, List<Expression> expressions)
         {
             for (int i = ImHere; i < codeline.Count; i++)
             {
@@ -149,7 +150,7 @@ namespace HULK_COMPILER
             Application.ThrowError(Utils.Error);
             return (0, null)!;
         }
-        public static (int, Expression) A(List<Token> codeline, int ImHere, Expression last = null!)
+        private static (int, Expression) A(List<Token> codeline, int ImHere, Expression last = null!)
         {
             (int, Expression) result_Z;
             if (codeline[ImHere].Types == Token.TokenTypes.Token_Not)
@@ -165,13 +166,13 @@ namespace HULK_COMPILER
             }
             return result_Z;
         }
-        public static (int, Expression) B(List<Token> codeline, int ImHere, Expression last)
+        private static (int, Expression) B(List<Token> codeline, int ImHere, Expression last)
         {
             (int, Expression) result_E = E(codeline, ImHere, last);
             (int, Expression) result_W = W(codeline, result_E.Item1, result_E.Item2);
             return result_W;
         }
-        public static (int, Expression) Z(List<Token> codeline, int ImHere, Expression last)
+        private static (int, Expression) Z(List<Token> codeline, int ImHere, Expression last)
         {
             (int, Expression) result_A;
             switch (codeline[ImHere].Types)
@@ -188,13 +189,13 @@ namespace HULK_COMPILER
                 default: return (ImHere, last);
             }
         }
-        public static (int, Expression) E(List<Token> codeline, int ImHere, Expression last)
+        private static (int, Expression) E(List<Token> codeline, int ImHere, Expression last)
         {
             (int, Expression) result_F = F(codeline, ImHere, last);
             (int, Expression) result_X = X(codeline, result_F.Item1, result_F.Item2);
             return result_X;
         }
-        public static (int, Expression) W(List<Token> codeline, int ImHere, Expression last)
+        private static (int, Expression) W(List<Token> codeline, int ImHere, Expression last)
         {
             (int, Expression) result_E;
             switch (codeline[ImHere].Types)
@@ -232,11 +233,13 @@ namespace HULK_COMPILER
                 default: return (ImHere, last);
             }
         }
-        public static (int, Expression) X(List<Token> codeline, int ImHere, Expression last)
+        private static (int, Expression) X(List<Token> codeline, int ImHere, Expression last)
         {
             (int, Expression) result_E;
             if (codeline[ImHere].Types == Token.TokenTypes.Token_Sum)
             {
+                // resultF = F(....);
+                // resultX = X(..., last: new SumExpression(last, resultF));
                 result_E = E(codeline, ImHere + 1, last);
                 Expression sum = new SumExpression(last, result_E.Item2);
                 return (result_E.Item1, sum);
@@ -255,13 +258,13 @@ namespace HULK_COMPILER
             }
             return (ImHere, last);
         }
-        public static (int, Expression) F(List<Token> codeline, int ImHere, Expression last)
+        private static (int, Expression) F(List<Token> codeline, int ImHere, Expression last)
         {
             (int, Expression) result_T = T(codeline, ImHere, last);
             (int, Expression) result_Y = Y(codeline, result_T.Item1, result_T.Item2);
             return result_Y;
         }
-        public static (int, Expression) Y(List<Token> codeline, int ImHere, Expression last)
+        private static (int, Expression) Y(List<Token> codeline, int ImHere, Expression last)
         {
             (int, Expression) result_F;
             if (codeline[ImHere].Types == Token.TokenTypes.Token_Mult)
@@ -290,7 +293,7 @@ namespace HULK_COMPILER
             }
             return (ImHere, last);
         }
-        public static (int, Expression) T(List<Token> codeline, int ImHere, Expression last)
+        private static (int, Expression) T(List<Token> codeline, int ImHere, Expression last)
         {
             if (codeline[ImHere].Types == Token.TokenTypes.Token_Log)
             {

@@ -90,7 +90,8 @@ namespace HULK_COMPILER
                 }
             }
             Utils.Error = "! SEMANTIC ERROR: Tha variable " + ID.Value + ", is not declared in this scope";
-            throw new Exception();
+            Application.ThrowError(Utils.Error);
+            throw new();
         }
     }
     public class ChainExpression : Expression

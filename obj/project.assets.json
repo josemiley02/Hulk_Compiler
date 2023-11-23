@@ -9,7 +9,8 @@
   },
   "packageFolders": {
     "C:\\Users\\leyva\\.nuget\\packages\\": {},
-    "C:\\Users\\leyva\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder": {}
+    "C:\\Users\\leyva\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
@@ -21,7 +22,8 @@
       "outputPath": "C:\\Miguel\\Nueva carpeta\\Hulk_Compiler - copia\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Users\\leyva\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder"
+        "C:\\Users\\leyva\\AppData\\Roaming\\Godot\\mono\\GodotNuGetFallbackFolder",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
         "C:\\Users\\leyva\\AppData\\Roaming\\NuGet\\NuGet.Config",

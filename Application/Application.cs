@@ -12,7 +12,7 @@ namespace HULK_COMPILER
             SelectKey();
         }
         //Application is Run
-        public static void SelectKey()
+        private static void SelectKey()
         {
             System.Console.Write(">>>");
             string line = Console.ReadLine()!;

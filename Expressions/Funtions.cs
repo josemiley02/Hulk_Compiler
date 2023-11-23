@@ -72,6 +72,13 @@ namespace HULK_COMPILER
 
         public override Scope.Declared Semantic_Walk()
         {
+            // foreach (var item in Utils.Funtions)
+            // {
+            //     if(item.Name == funtion.Name)
+            //     {
+            //         funtion = item;
+            //     }
+            // }
             if (funtion.Cant_Arg.Count == expressions.Count)
             {
                 foreach (var item in expressions)
