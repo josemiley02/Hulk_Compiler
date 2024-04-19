@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Hulk Compiler Jose Miguel Leyva De la Cruz")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dfe50333f3dcd7a98fbfd26b169357568353d8e4")]
 [assembly: System.Reflection.AssemblyProductAttribute("Hulk Compiler Jose Miguel Leyva De la Cruz")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Hulk Compiler Jose Miguel Leyva De la Cruz")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
